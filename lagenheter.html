@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CRJ Fastigheter AB – Vår fastighet på Skövdevägen 39 i Skultorp. Välskötta hyresrätter nära Skövde.">
+  <title>Fastigheter – CRJ Fastigheter AB</title>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%231B2C4E'/><text y='.9em' font-size='65' x='50%' text-anchor='middle' font-family='Georgia,serif' fill='%23C8A96E' font-weight='700'>C</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" aria-label="Huvudnavigation">
+    <div class="container">
+      <div class="navbar__inner">
+        <a href="index.html" class="navbar__logo" aria-label="CRJ Fastigheter AB – Startsida">
+          <div class="navbar__logo-mark">CRJ</div>
+          <div class="navbar__logo-text">
+            <span class="navbar__logo-name">CRJ Fastigheter</span>
+            <span class="navbar__logo-sub">Fastighets AB</span>
+          </div>
+        </a>
+        <ul class="navbar__nav" role="list">
+          <li><a href="index.html" class="navbar__link">Hem</a></li>
+          <li><a href="om-oss.html" class="navbar__link">Om oss</a></li>
+          <li><a href="lagenheter.html" class="navbar__link">Fastigheter</a></li>
+          <li><a href="hyresgast.html" class="navbar__link">För hyresgäster</a></li>
+          <li><a href="lediga.html" class="navbar__link navbar__cta">Lediga lägenheter</a></li>
+        </ul>
+        <button class="navbar__hamburger" aria-label="Öppna meny" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="navbar__mobile" role="dialog" aria-label="Mobilmeny">
+    <button class="navbar__mobile-close" aria-label="Stäng meny"><i class="fa-solid fa-xmark"></i></button>
+    <a href="index.html" class="navbar__mobile-link">Hem</a>
+    <a href="om-oss.html" class="navbar__mobile-link">Om oss</a>
+    <a href="lagenheter.html" class="navbar__mobile-link">Fastigheter</a>
+    <a href="hyresgast.html" class="navbar__mobile-link">För hyresgäster</a>
+    <a href="lediga.html" class="navbar__mobile-link">Lediga lägenheter</a>
+    <a href="kontakt.html" class="navbar__mobile-link">Kontakt</a>
+  </div>
+
+  <!-- ========== PAGE HERO ========== -->
+  <section class="hero hero--page" aria-label="Fastigheter">
+    <div class="hero__bg-pattern" aria-hidden="true">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="grid3" width="50" height="50" patternUnits="userSpaceOnUse">
+            <path d="M 50 0 L 0 0 0 50" fill="none" stroke="white" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid3)"/>
+      </svg>
+    </div>
+    <div class="hero__bg-overlay" aria-hidden="true"></div>
+    <div class="container">
+      <div class="hero__content">
+        <div class="hero__tag">
+          <i class="fa-solid fa-building"></i>
+          Vår fastighetsportfölj
+        </div>
+        <h1 class="hero__title">Våra <em>fastigheter</em></h1>
+        <p class="hero__subtitle">
+          Välskötta bostadsfastigheter i Skövdeområdet med fokus på kvalitet,
+          trygghet och trivsam boendemiljö.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROPERTY DETAIL ========== -->
+  <section class="section">
+    <div class="container">
+      <div style="max-width: 960px; margin: 0 auto;">
+
+        <!-- Property header -->
+        <div class="text-center fade-in" style="margin-bottom: 56px;">
+          <span class="section-tag">Skultorp, Skövde</span>
+          <h2 class="section-title">Skövdevägen 39</h2>
+          <div class="divider divider--center"></div>
+          <p class="section-subtitle">
+            Välbelägen bostadsfastighet i trivsamma Skultorp, med goda kommunikationer
+            och naturskön omgivning.
+          </p>
+        </div>
+
+        <!-- Main property card -->
+        <div class="property-card fade-in" style="margin-bottom: 48px;">
+          <div class="property-card__image" style="height: 380px;">
+            <div class="property-card__badge">Vår fastighet</div>
+            <!-- Detailed building SVG -->
+            <svg viewBox="0 0 600 320" style="width:100%;max-width:560px;opacity:0.9;" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Sky gradient elements -->
+              <ellipse cx="480" cy="60" rx="100" ry="40" fill="rgba(200,169,110,0.08)"/>
+              <ellipse cx="120" cy="80" rx="80" ry="30" fill="rgba(255,255,255,0.04)"/>
+              <!-- Main building body -->
+              <rect x="80" y="90" width="440" height="220" fill="rgba(255,255,255,0.1)" rx="4"/>
+              <!-- Roof / gable -->
+              <polygon points="300,30 60,95 540,95" fill="rgba(255,255,255,0.12)"/>
+              <polygon points="300,30 60,95 540,95" stroke="rgba(200,169,110,0.4)" stroke-width="1.5" fill="none"/>
+              <!-- Chimney -->
+              <rect x="380" y="40" width="24" height="58" fill="rgba(255,255,255,0.1)"/>
+              <!-- Main door -->
+              <rect x="262" y="240" width="76" height="70" fill="rgba(200,169,110,0.6)" rx="4"/>
+              <rect x="266" y="244" width="68" height="62" fill="rgba(200,169,110,0.3)" rx="3"/>
+              <circle cx="327" cy="278" r="5" fill="rgba(255,255,255,0.8)"/>
+              <!-- Steps -->
+              <rect x="248" y="308" width="104" height="6" fill="rgba(255,255,255,0.12)" rx="2"/>
+              <rect x="256" y="304" width="88" height="4" fill="rgba(255,255,255,0.08)" rx="2"/>
+              <!-- Windows – Row 1 -->
+              <rect x="105" y="115" width="68" height="56" fill="rgba(255,255,255,0.1)" rx="3"/>
+              <line x1="139" y1="115" x2="139" y2="171" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+              <line x1="105" y1="143" x2="173" y2="143" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+
+              <rect x="216" y="115" width="68" height="56" fill="rgba(200,169,110,0.2)" rx="3"/>
+              <line x1="250" y1="115" x2="250" y2="171" stroke="rgba(200,169,110,0.3)" stroke-width="1"/>
+              <line x1="216" y1="143" x2="284" y2="143" stroke="rgba(200,169,110,0.3)" stroke-width="1"/>
+
+              <rect x="316" y="115" width="68" height="56" fill="rgba(255,255,255,0.1)" rx="3"/>
+              <line x1="350" y1="115" x2="350" y2="171" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+              <line x1="316" y1="143" x2="384" y2="143" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+
+              <rect x="427" y="115" width="68" height="56" fill="rgba(200,169,110,0.15)" rx="3"/>
+              <line x1="461" y1="115" x2="461" y2="171" stroke="rgba(200,169,110,0.25)" stroke-width="1"/>
+              <line x1="427" y1="143" x2="495" y2="143" stroke="rgba(200,169,110,0.25)" stroke-width="1"/>
+
+              <!-- Windows – Row 2 -->
+              <rect x="105" y="195" width="68" height="56" fill="rgba(200,169,110,0.15)" rx="3"/>
+              <rect x="427" y="195" width="68" height="56" fill="rgba(255,255,255,0.1)" rx="3"/>
+
+              <!-- Ground -->
+              <rect x="0" y="308" width="600" height="12" fill="rgba(255,255,255,0.06)" rx="2"/>
+              <!-- Trees -->
+              <rect x="14" y="235" width="14" height="85" fill="rgba(255,255,255,0.1)" rx="3"/>
+              <ellipse cx="21" cy="218" rx="30" ry="42" fill="rgba(255,255,255,0.07)"/>
+              <rect x="572" y="250" width="14" height="70" fill="rgba(255,255,255,0.1)" rx="3"/>
+              <ellipse cx="579" cy="234" rx="26" ry="36" fill="rgba(255,255,255,0.07)"/>
+              <!-- Small bush -->
+              <ellipse cx="228" cy="308" rx="18" ry="12" fill="rgba(255,255,255,0.06)"/>
+              <ellipse cx="372" cy="308" rx="16" ry="10" fill="rgba(255,255,255,0.06)"/>
+            </svg>
+          </div>
+
+          <div class="property-card__body">
+            <div style="display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: start;">
+              <div>
+                <h2 class="property-card__title" style="font-size: 1.8rem;">Skövdevägen 39, Skultorp</h2>
+                <div class="property-card__location" style="font-size: 1rem;">
+                  <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                  Skultorp, Skövde kommun, Västra Götaland
+                </div>
+              </div>
+              <span style="background: rgba(200,169,110,0.12); color: var(--gold); border: 1px solid rgba(200,169,110,0.3); padding: 8px 20px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.06em;">Hyresrätter</span>
+            </div>
+
+            <p class="property-card__desc" style="font-size: 1rem; margin-top: 16px;">
+              En välskött bostadsfastighet i lugna och trivsamma Skultorp. Fastigheten erbjuder
+              moderna hyresrätter med god standard i ett naturnära läge. Skultorp är en populär
+              förort till Skövde med stark sammanhållning och charmig bymiljö.
+            </p>
+
+            <div class="property-card__features" style="flex-wrap: wrap; gap: 20px;">
+              <span class="property-card__feature">
+                <i class="fa-solid fa-house" aria-hidden="true"></i>
+                Bostadsfastighet
+              </span>
+              <span class="property-card__feature">
+                <i class="fa-solid fa-bus" aria-hidden="true"></i>
+                Buss till Skövde
+              </span>
+              <span class="property-card__feature">
+                <i class="fa-solid fa-tree" aria-hidden="true"></i>
+                Naturnära
+              </span>
+              <span class="property-card__feature">
+                <i class="fa-solid fa-car" aria-hidden="true"></i>
+                Parkering
+              </span>
+              <span class="property-card__feature">
+                <i class="fa-solid fa-recycle" aria-hidden="true"></i>
+                Sopsortering
+              </span>
+              <span class="property-card__feature">
+                <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                Välskött
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Area description -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 16px;" class="fade-in">
+          <!-- About the area -->
+          <div style="background: var(--grey-light); border-radius: var(--radius-md); padding: 36px;">
+            <h3 style="margin-bottom: 16px; display: flex; align-items: center; gap: 10px; font-size: 1.2rem;">
+              <i class="fa-solid fa-map-location-dot" style="color: var(--gold);" aria-hidden="true"></i>
+              Om Skultorp
+            </h3>
+            <p style="font-size: 0.93rem; margin-bottom: 14px;">
+              Skultorp är en trivsam tätort belägen cirka 5 km söder om Skövde centrum
+              längs riksväg 49. Orten har drygt 2 500 invånare och erbjuder ett lugnt
+              och naturnära boende med stark lokal gemenskap.
+            </p>
+            <p style="font-size: 0.93rem;">
+              Skultorp har grundläggande service såsom livsmedelsbutik, skola, förskola
+              och idrottsanläggningar. Naturen med vandringsleder och grönområden finns
+              lättillgänglig direkt utanför dörren.
+            </p>
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--grey-mid);">
+              <p style="font-size: 0.82rem; color: var(--text-muted); display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
+                <i class="fa-solid fa-route" style="color: var(--gold);" aria-hidden="true"></i>
+                <span><strong style="color: var(--navy);">5 km</strong> till Skövde centrum</span>
+              </p>
+              <p style="font-size: 0.82rem; color: var(--text-muted); display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
+                <i class="fa-solid fa-bus" style="color: var(--gold);" aria-hidden="true"></i>
+                <span><strong style="color: var(--navy);">Busslinje</strong> direkt till Skövde</span>
+              </p>
+              <p style="font-size: 0.82rem; color: var(--text-muted); display: flex; gap: 8px; align-items: center;">
+                <i class="fa-solid fa-train" style="color: var(--gold);" aria-hidden="true"></i>
+                <span><strong style="color: var(--navy);">Skövde station</strong> med pendeltåg</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Nearby services -->
+          <div style="background: var(--navy); border-radius: var(--radius-md); padding: 36px; color: white;">
+            <h3 style="color: white; margin-bottom: 16px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px;">
+              <i class="fa-solid fa-list-check" style="color: var(--gold);" aria-hidden="true"></i>
+              I närheten
+            </h3>
+            <ul style="display: flex; flex-direction: column; gap: 12px;">
+              <li style="display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: rgba(255,255,255,0.8);">
+                <i class="fa-solid fa-circle-check" style="color: var(--gold); font-size: 0.85rem; flex-shrink:0;" aria-hidden="true"></i>
+                ICA Nära Skultorp (~300 m)
+              </li>
+              <li style="display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: rgba(255,255,255,0.8);">
+                <i class="fa-solid fa-circle-check" style="color: var(--gold); font-size: 0.85rem; flex-shrink:0;" aria-hidden="true"></i>
+                Skulltorpsskolan F–6
+              </li>
+              <li style="display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: rgba(255,255,255,0.8);">
+                <i class="fa-solid fa-circle-check" style="color: var(--gold); font-size: 0.85rem; flex-shrink:0;" aria-hidden="true"></i>
+                Förskola i byn
+              </li>
+              <li style="display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: rgba(255,255,255,0.8);">
+                <i class="fa-solid fa-circle-check" style="color: var(--gold); font-size: 0.85rem; flex-shrink:0;" aria-hidden="true"></i>
+                Idrottsplats &amp; tennisbana
+              </li>
+              <li style="display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: rgba(255,255,255,0.8);">
+                <i class="fa-solid fa-circle-check" style="color: var(--gold); font-size: 0.85rem; flex-shrink:0;" aria-hidden="true"></i>
+                Apoteket (Skövde, 5 km)
+              </li>
+              <li style="display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: rgba(255,255,255,0.8);">
+                <i class="fa-solid fa-circle-check" style="color: var(--gold); font-size: 0.85rem; flex-shrink:0;" aria-hidden="true"></i>
+                Skövde Resecentrum (5 km)
+              </li>
+              <li style="display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: rgba(255,255,255,0.8);">
+                <i class="fa-solid fa-circle-check" style="color: var(--gold); font-size: 0.85rem; flex-shrink:0;" aria-hidden="true"></i>
+                Vandringsleder &amp; natur
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA ========== -->
+  <section class="section cta-banner">
+    <div class="container">
+      <div class="cta-banner__inner fade-in">
+        <span class="section-tag">Intresserad?</span>
+        <h2 class="cta-banner__title">Vill du bo på Skövdevägen 39?</h2>
+        <p class="cta-banner__subtitle">
+          Anmäl ditt intresse så kontaktar vi dig när en lägenhet blir ledig.
+        </p>
+        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+          <a href="lediga.html" class="btn btn--primary btn--lg">
+            <i class="fa-solid fa-file-signature"></i>
+            Anmäl intresse
+          </a>
+          <a href="kontakt.html" class="btn btn--outline btn--lg">
+            <i class="fa-solid fa-phone"></i>
+            Kontakta oss
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand-name">
+            <div class="navbar__logo-mark" style="width:38px;height:38px;font-size:1rem;">CRJ</div>
+            CRJ Fastigheter AB
+          </div>
+          <p class="footer__brand-desc">Välskötta hyresrätter i Skövdeområdet. Trygg förvaltning sedan 2019.</p>
+          <span class="footer__orgnr">Org.nr: 559218-7032</span>
+        </div>
+        <div>
+          <p class="footer__heading">Navigation</p>
+          <ul class="footer__links" role="list">
+            <li><a href="index.html" class="footer__link">Hem</a></li>
+            <li><a href="om-oss.html" class="footer__link">Om oss</a></li>
+            <li><a href="lagenheter.html" class="footer__link">Fastigheter</a></li>
+            <li><a href="lediga.html" class="footer__link">Lediga lägenheter</a></li>
+            <li><a href="hyresgast.html" class="footer__link">För hyresgäster</a></li>
+            <li><a href="kontakt.html" class="footer__link">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Information</p>
+          <ul class="footer__links" role="list">
+            <li><a href="integritetspolicy.html" class="footer__link">Integritetspolicy</a></li>
+            <li><a href="hyresgast.html" class="footer__link">Felanmälan</a></li>
+            <li><a href="lediga.html" class="footer__link">Intresseanmälan</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Kontakt</p>
+          <div class="footer__contact-item"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>Mossvägen 4, 541 52 Skövde</span></div>
+          <div class="footer__contact-item"><i class="fa-solid fa-phone" aria-hidden="true"></i><a href="tel:+46735443362">073-544 33 62</a></div>
+          <div class="footer__contact-item"><i class="fa-solid fa-envelope" aria-hidden="true"></i><a href="mailto:crjfastighet@gmail.com">crjfastighet@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>&copy; 2025 CRJ Fastighets AB (559218-7032). Alla rättigheter förbehållna.</span>
+        <div class="footer__bottom-links">
+          <a href="integritetspolicy.html" class="footer__bottom-link">Integritetspolicy</a>
+          <a href="kontakt.html" class="footer__bottom-link">Kontakt</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookiesamtycke">
+    <div class="container">
+      <div class="cookie-banner__inner">
+        <p class="cookie-banner__text"><i class="fa-solid fa-cookie-bite" aria-hidden="true"></i>&nbsp;Vi använder cookies. Läs mer i vår <a href="integritetspolicy.html">integritetspolicy</a>.</p>
+        <div class="cookie-banner__actions">
+          <button class="cookie-btn cookie-btn--decline">Avböj</button>
+          <button class="cookie-btn cookie-btn--accept">Godkänn</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lediga lägenheter och intresseanmälan – CRJ Fastigheter AB i Skövde/Skultorp. Registrera ditt intresse här.">
+  <title>Lediga lägenheter – CRJ Fastigheter AB</title>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%231B2C4E'/><text y='.9em' font-size='65' x='50%' text-anchor='middle' font-family='Georgia,serif' fill='%23C8A96E' font-weight='700'>C</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" aria-label="Huvudnavigation">
+    <div class="container">
+      <div class="navbar__inner">
+        <a href="index.html" class="navbar__logo" aria-label="CRJ Fastigheter AB – Startsida">
+          <div class="navbar__logo-mark">CRJ</div>
+          <div class="navbar__logo-text">
+            <span class="navbar__logo-name">CRJ Fastigheter</span>
+            <span class="navbar__logo-sub">Fastighets AB</span>
+          </div>
+        </a>
+        <ul class="navbar__nav" role="list">
+          <li><a href="index.html" class="navbar__link">Hem</a></li>
+          <li><a href="om-oss.html" class="navbar__link">Om oss</a></li>
+          <li><a href="lagenheter.html" class="navbar__link">Fastigheter</a></li>
+          <li><a href="hyresgast.html" class="navbar__link">För hyresgäster</a></li>
+          <li><a href="lediga.html" class="navbar__link navbar__cta">Lediga lägenheter</a></li>
+        </ul>
+        <button class="navbar__hamburger" aria-label="Öppna meny" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="navbar__mobile" role="dialog" aria-label="Mobilmeny">
+    <button class="navbar__mobile-close" aria-label="Stäng meny"><i class="fa-solid fa-xmark"></i></button>
+    <a href="index.html" class="navbar__mobile-link">Hem</a>
+    <a href="om-oss.html" class="navbar__mobile-link">Om oss</a>
+    <a href="lagenheter.html" class="navbar__mobile-link">Fastigheter</a>
+    <a href="hyresgast.html" class="navbar__mobile-link">För hyresgäster</a>
+    <a href="lediga.html" class="navbar__mobile-link">Lediga lägenheter</a>
+    <a href="kontakt.html" class="navbar__mobile-link">Kontakt</a>
+  </div>
+
+  <!-- ========== PAGE HERO ========== -->
+  <section class="hero hero--page" aria-label="Lediga lägenheter">
+    <div class="hero__bg-pattern" aria-hidden="true">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="diag" width="40" height="40" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="40" stroke="white" stroke-width="0.5" opacity="0.5"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#diag)"/>
+      </svg>
+    </div>
+    <div class="hero__bg-overlay" aria-hidden="true"></div>
+    <div class="container">
+      <div class="hero__content">
+        <div class="hero__tag">
+          <i class="fa-solid fa-door-open"></i>
+          Hitta ditt hem
+        </div>
+        <h1 class="hero__title">Lediga <em>lägenheter</em></h1>
+        <p class="hero__subtitle">
+          Tillgängligheten varierar. Registrera ditt intresse nedan
+          och vi kontaktar dig när en lägenhet passar dig.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== AVAILABILITY INFO ========== -->
+  <section class="section section--grey">
+    <div class="container" style="max-width: 960px;">
+
+      <!-- Status notice -->
+      <div class="fade-in" style="background: white; border-radius: var(--radius-lg); padding: 40px 48px; box-shadow: var(--shadow-sm); border: 1px solid var(--grey-mid); margin-bottom: 56px; display: flex; gap: 28px; align-items: flex-start;">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: rgba(200,169,110,0.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <i class="fa-solid fa-circle-info" style="color: var(--gold); font-size: 1.4rem;" aria-hidden="true"></i>
+        </div>
+        <div>
+          <h3 style="font-size: 1.2rem; margin-bottom: 10px;">Aktuell tillgänglighet</h3>
+          <p>
+            Vi har för tillfället inga lediga lägenheter annonserade. Tillgängligheten på
+            bostadsmarknaden i Skultorp är hög och lägenheter går snabbt. Vi rekommenderar
+            att du registrerar ditt intresse nedan så att vi kan kontakta dig så fort
+            en lägenhet blir tillgänglig på <strong>Skövdevägen 39</strong>.
+          </p>
+          <p style="margin-top: 8px; font-size: 0.9rem; color: var(--text-muted);">
+            Har du frågor om specifika lägenheter? Ring oss gärna direkt på
+            <a href="tel:+46735443362" style="color: var(--navy); font-weight: 600;">073-544 33 62</a>.
+          </p>
+        </div>
+      </div>
+
+      <!-- How it works -->
+      <div class="text-center fade-in" style="margin-bottom: 48px;">
+        <span class="section-tag">Hur det fungerar</span>
+        <h2 class="section-title">Tre enkla steg</h2>
+        <div class="divider divider--center"></div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 64px;">
+        <div class="feature-card fade-in fade-delay-1">
+          <div class="feature-card__icon" aria-hidden="true" style="font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:800; color: var(--gold);">1</div>
+          <h3 class="feature-card__title">Fyll i formuläret</h3>
+          <p class="feature-card__desc">
+            Ange dina kontaktuppgifter och önskad lägenhetstyp i formuläret nedan.
+          </p>
+        </div>
+        <div class="feature-card fade-in fade-delay-2">
+          <div class="feature-card__icon" aria-hidden="true" style="font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:800; color: var(--gold);">2</div>
+          <h3 class="feature-card__title">Vi kontaktar dig</h3>
+          <p class="feature-card__desc">
+            När en lägenhet som passar dina önskemål blir ledig hör vi av oss personligen.
+          </p>
+        </div>
+        <div class="feature-card fade-in fade-delay-3">
+          <div class="feature-card__icon" aria-hidden="true" style="font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:800; color: var(--gold);">3</div>
+          <h3 class="feature-card__title">Visning &amp; kontrakt</h3>
+          <p class="feature-card__desc">
+            Vi bokar en visning, och om det passar skriver vi kontrakt – enkelt och tryggt.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== INTEREST FORM ========== -->
+  <section class="section" id="intresseanmalan">
+    <div class="container" style="max-width: 760px;">
+      <div class="text-center fade-in" style="margin-bottom: 48px;">
+        <span class="section-tag">Intresseanmälan</span>
+        <h2 class="section-title">Anmäl ditt intresse</h2>
+        <div class="divider divider--center"></div>
+        <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.7;">
+          Fyll i formuläret nedan. Vi sparar dina uppgifter i enlighet med
+          <a href="integritetspolicy.html" style="color: var(--navy); text-decoration: underline; font-weight: 500;">vår integritetspolicy</a>
+          och kontaktar dig när en passande lägenhet finns tillgänglig.
+        </p>
+      </div>
+
+      <div style="background: white; border-radius: var(--radius-lg); padding: 48px; box-shadow: var(--shadow-md); border: 1px solid var(--grey-mid);" class="fade-in">
+        <form id="interest-form" novalidate aria-label="Intresseanmälan">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="interest-name">Förnamn och efternamn <span style="color:#e05252;">*</span></label>
+              <input type="text" id="interest-name" name="name" placeholder="Anna Andersson" required autocomplete="name">
+              <span class="form-error" aria-live="polite"></span>
+            </div>
+            <div class="form-group">
+              <label for="interest-phone">Telefonnummer <span style="color:#e05252;">*</span></label>
+              <input type="tel" id="interest-phone" name="phone" placeholder="070-123 45 67" required autocomplete="tel">
+              <span class="form-error" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="interest-email">E-postadress <span style="color:#e05252;">*</span></label>
+            <input type="email" id="interest-email" name="email" placeholder="anna@example.se" required autocomplete="email">
+            <span class="form-error" aria-live="polite"></span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="interest-size">Önskad lägenhetstyp <span style="color:#e05252;">*</span></label>
+              <select id="interest-size" name="size" required>
+                <option value="">Välj storlek</option>
+                <option value="1rok">1 rum och kök (1 rok)</option>
+                <option value="2rok">2 rum och kök (2 rok)</option>
+                <option value="3rok">3 rum och kök (3 rok)</option>
+                <option value="3rok+">4 rok eller större</option>
+                <option value="any">Spelar ingen roll</option>
+              </select>
+              <span class="form-error" aria-live="polite"></span>
+            </div>
+            <div class="form-group">
+              <label for="interest-move">Önskad inflyttning</label>
+              <input type="text" id="interest-move" name="move-date" placeholder="T.ex. Omgående eller jan 2026">
+              <span class="form-error" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="interest-msg">Övrig information</label>
+            <textarea id="interest-msg" name="message" placeholder="Berätta gärna mer om dig och dina behov. Har du husdjur? Behöver du parkering?"></textarea>
+          </div>
+
+          <div style="background: var(--grey-light); border-radius: var(--radius-sm); padding: 16px 20px; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 24px; display: flex; gap: 12px; align-items: flex-start;">
+            <i class="fa-solid fa-lock" style="color: var(--gold); margin-top: 2px; flex-shrink:0;" aria-hidden="true"></i>
+            <span>Dina uppgifter behandlas konfidentiellt och används enbart för att kontakta dig angående lediga lägenheter.
+            Läs vår <a href="integritetspolicy.html" style="color: var(--navy); font-weight: 500;">integritetspolicy</a>.</span>
+          </div>
+
+          <button type="submit" class="btn btn--primary" style="width: 100%; justify-content: center; padding: 18px;">
+            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+            Skicka intresseanmälan
+          </button>
+
+          <div class="form-success" role="alert"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== INFO BOX ========== -->
+  <section class="section--sm section--cream">
+    <div class="container" style="max-width: 760px;">
+      <div class="fade-in">
+        <h3 style="margin-bottom: 20px; font-size: 1.3rem;">Vanliga frågor</h3>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <details style="border: 1px solid var(--grey-mid); border-radius: var(--radius-sm); overflow: hidden;">
+            <summary style="padding: 18px 20px; cursor: pointer; font-weight: 600; color: var(--navy); font-size: 0.95rem; list-style: none; display: flex; justify-content: space-between; align-items: center; background: white;">
+              Hur lång är kötiden?
+              <i class="fa-solid fa-chevron-down" style="color: var(--gold); font-size: 0.85rem; transition: transform 0.3s ease;" aria-hidden="true"></i>
+            </summary>
+            <div style="padding: 16px 20px; background: white; border-top: 1px solid var(--grey-mid); font-size: 0.92rem; color: var(--text-muted); line-height: 1.7;">
+              Vi har ingen formell kö med kötid. Vi kontaktar intresserade i den ordning de anmält intresse och matchar utifrån lägenhetens storlek och dina önskemål.
+            </div>
+          </details>
+
+          <details style="border: 1px solid var(--grey-mid); border-radius: var(--radius-sm); overflow: hidden;">
+            <summary style="padding: 18px 20px; cursor: pointer; font-weight: 600; color: var(--navy); font-size: 0.95rem; list-style: none; display: flex; justify-content: space-between; align-items: center; background: white;">
+              Vad kostar en lägenhet?
+              <i class="fa-solid fa-chevron-down" style="color: var(--gold); font-size: 0.85rem;" aria-hidden="true"></i>
+            </summary>
+            <div style="padding: 16px 20px; background: white; border-top: 1px solid var(--grey-mid); font-size: 0.92rem; color: var(--text-muted); line-height: 1.7;">
+              Hyran varierar beroende på lägenhetens storlek och standard. Kontakta oss direkt för aktuella hyresuppgifter.
+            </div>
+          </details>
+
+          <details style="border: 1px solid var(--grey-mid); border-radius: var(--radius-sm); overflow: hidden;">
+            <summary style="padding: 18px 20px; cursor: pointer; font-weight: 600; color: var(--navy); font-size: 0.95rem; list-style: none; display: flex; justify-content: space-between; align-items: center; background: white;">
+              Tillåts husdjur?
+              <i class="fa-solid fa-chevron-down" style="color: var(--gold); font-size: 0.85rem;" aria-hidden="true"></i>
+            </summary>
+            <div style="padding: 16px 20px; background: white; border-top: 1px solid var(--grey-mid); font-size: 0.92rem; color: var(--text-muted); line-height: 1.7;">
+              Vi bedömer husdjur från fall till fall. Nämn det gärna i din intresseanmälan eller kontakta oss direkt för att diskutera.
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand-name">
+            <div class="navbar__logo-mark" style="width:38px;height:38px;font-size:1rem;">CRJ</div>
+            CRJ Fastigheter AB
+          </div>
+          <p class="footer__brand-desc">Välskötta hyresrätter i Skövdeområdet. Trygg förvaltning sedan 2019.</p>
+          <span class="footer__orgnr">Org.nr: 559218-7032</span>
+        </div>
+        <div>
+          <p class="footer__heading">Navigation</p>
+          <ul class="footer__links" role="list">
+            <li><a href="index.html" class="footer__link">Hem</a></li>
+            <li><a href="om-oss.html" class="footer__link">Om oss</a></li>
+            <li><a href="lagenheter.html" class="footer__link">Fastigheter</a></li>
+            <li><a href="lediga.html" class="footer__link">Lediga lägenheter</a></li>
+            <li><a href="hyresgast.html" class="footer__link">För hyresgäster</a></li>
+            <li><a href="kontakt.html" class="footer__link">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Information</p>
+          <ul class="footer__links" role="list">
+            <li><a href="integritetspolicy.html" class="footer__link">Integritetspolicy</a></li>
+            <li><a href="hyresgast.html" class="footer__link">Felanmälan</a></li>
+            <li><a href="lediga.html" class="footer__link">Intresseanmälan</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Kontakt</p>
+          <div class="footer__contact-item"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>Mossvägen 4, 541 52 Skövde</span></div>
+          <div class="footer__contact-item"><i class="fa-solid fa-phone" aria-hidden="true"></i><a href="tel:+46735443362">073-544 33 62</a></div>
+          <div class="footer__contact-item"><i class="fa-solid fa-envelope" aria-hidden="true"></i><a href="mailto:crjfastighet@gmail.com">crjfastighet@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>&copy; 2025 CRJ Fastighets AB (559218-7032). Alla rättigheter förbehållna.</span>
+        <div class="footer__bottom-links">
+          <a href="integritetspolicy.html" class="footer__bottom-link">Integritetspolicy</a>
+          <a href="kontakt.html" class="footer__bottom-link">Kontakt</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookiesamtycke">
+    <div class="container">
+      <div class="cookie-banner__inner">
+        <p class="cookie-banner__text"><i class="fa-solid fa-cookie-bite" aria-hidden="true"></i>&nbsp;Vi använder cookies. Läs mer i vår <a href="integritetspolicy.html">integritetspolicy</a>.</p>
+        <div class="cookie-banner__actions">
+          <button class="cookie-btn cookie-btn--decline">Avböj</button>
+          <button class="cookie-btn cookie-btn--accept">Godkänn</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

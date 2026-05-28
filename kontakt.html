@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kontakta CRJ Fastigheter AB – Telefon, e-post och adress. Vi svarar snabbt på alla frågor.">
+  <title>Kontakt – CRJ Fastigheter AB</title>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%231B2C4E'/><text y='.9em' font-size='65' x='50%' text-anchor='middle' font-family='Georgia,serif' fill='%23C8A96E' font-weight='700'>C</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" aria-label="Huvudnavigation">
+    <div class="container">
+      <div class="navbar__inner">
+        <a href="index.html" class="navbar__logo" aria-label="CRJ Fastigheter AB – Startsida">
+          <div class="navbar__logo-mark">CRJ</div>
+          <div class="navbar__logo-text">
+            <span class="navbar__logo-name">CRJ Fastigheter</span>
+            <span class="navbar__logo-sub">Fastighets AB</span>
+          </div>
+        </a>
+        <ul class="navbar__nav" role="list">
+          <li><a href="index.html" class="navbar__link">Hem</a></li>
+          <li><a href="om-oss.html" class="navbar__link">Om oss</a></li>
+          <li><a href="lagenheter.html" class="navbar__link">Fastigheter</a></li>
+          <li><a href="hyresgast.html" class="navbar__link">För hyresgäster</a></li>
+          <li><a href="lediga.html" class="navbar__link navbar__cta">Lediga lägenheter</a></li>
+        </ul>
+        <button class="navbar__hamburger" aria-label="Öppna meny" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="navbar__mobile" role="dialog" aria-label="Mobilmeny">
+    <button class="navbar__mobile-close" aria-label="Stäng meny"><i class="fa-solid fa-xmark"></i></button>
+    <a href="index.html" class="navbar__mobile-link">Hem</a>
+    <a href="om-oss.html" class="navbar__mobile-link">Om oss</a>
+    <a href="lagenheter.html" class="navbar__mobile-link">Fastigheter</a>
+    <a href="hyresgast.html" class="navbar__mobile-link">För hyresgäster</a>
+    <a href="lediga.html" class="navbar__mobile-link">Lediga lägenheter</a>
+    <a href="kontakt.html" class="navbar__mobile-link">Kontakt</a>
+  </div>
+
+  <!-- ========== PAGE HERO ========== -->
+  <section class="hero hero--page" aria-label="Kontakt">
+    <div class="hero__bg-pattern" aria-hidden="true">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="cross" width="48" height="48" patternUnits="userSpaceOnUse">
+            <line x1="24" y1="0" x2="24" y2="48" stroke="white" stroke-width="0.4"/>
+            <line x1="0" y1="24" x2="48" y2="24" stroke="white" stroke-width="0.4"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#cross)"/>
+      </svg>
+    </div>
+    <div class="hero__bg-overlay" aria-hidden="true"></div>
+    <div class="container">
+      <div class="hero__content">
+        <div class="hero__tag">
+          <i class="fa-solid fa-envelope"></i>
+          Vi svarar snabbt
+        </div>
+        <h1 class="hero__title">Kontakta <em>oss</em></h1>
+        <p class="hero__subtitle">
+          Har du frågor om lägenheter, hyra, felanmälningar eller annat?
+          Vi finns här för dig – hör av dig på det sätt som passar dig bäst.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT SECTION ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Contact Form -->
+        <div class="fade-in-left">
+          <span class="section-tag">Skicka meddelande</span>
+          <h2 class="section-title" style="font-size: 2rem;">Hör av dig</h2>
+          <div class="divider"></div>
+          <p style="margin-bottom: 32px; font-size: 0.95rem;">
+            Fyll i formuläret nedan så återkommer vi inom <strong style="color: var(--navy);">1–2 arbetsdagar</strong>.
+            Akuta ärenden – ring oss direkt.
+          </p>
+
+          <form id="contact-form" novalidate aria-label="Kontaktformulär">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact-name">Namn <span style="color:#e05252;">*</span></label>
+                <input type="text" id="contact-name" name="name" placeholder="Ditt namn" required autocomplete="name">
+                <span class="form-error" aria-live="polite"></span>
+              </div>
+              <div class="form-group">
+                <label for="contact-phone">Telefon</label>
+                <input type="tel" id="contact-phone" name="phone" placeholder="070-123 45 67" autocomplete="tel">
+                <span class="form-error" aria-live="polite"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-email">E-post <span style="color:#e05252;">*</span></label>
+              <input type="email" id="contact-email" name="email" placeholder="din@epost.se" required autocomplete="email">
+              <span class="form-error" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-subject">Ämne</label>
+              <select id="contact-subject" name="subject">
+                <option value="">Välj ämne</option>
+                <option value="ledig">Intresse för ledig lägenhet</option>
+                <option value="hyresgast">Fråga som hyresgäst</option>
+                <option value="felanmalan">Felanmälan</option>
+                <option value="allmant">Allmän fråga</option>
+                <option value="annat">Annat</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-message">Meddelande <span style="color:#e05252;">*</span></label>
+              <textarea id="contact-message" name="message" placeholder="Berätta vad du undrar om..." rows="6" required></textarea>
+              <span class="form-error" aria-live="polite"></span>
+            </div>
+
+            <div style="background: var(--grey-light); border-radius: var(--radius-sm); padding: 14px 18px; margin-bottom: 24px; display: flex; gap: 10px; align-items: flex-start; font-size: 0.84rem; color: var(--text-muted);">
+              <i class="fa-solid fa-shield-halved" style="color: var(--gold); flex-shrink:0; margin-top:1px;" aria-hidden="true"></i>
+              <span>Vi behandlar dina uppgifter enligt GDPR. Läs vår <a href="integritetspolicy.html" style="color: var(--navy); font-weight: 500;">integritetspolicy</a>.</span>
+            </div>
+
+            <button type="submit" class="btn btn--primary" style="width: 100%; justify-content: center; padding: 18px; font-size: 1rem;">
+              <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+              Skicka meddelande
+            </button>
+
+            <div class="form-success" role="alert"></div>
+          </form>
+        </div>
+
+        <!-- Contact Info Card -->
+        <div class="fade-in-right">
+          <div class="contact-info-card">
+            <h3>Kontaktuppgifter</h3>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon" aria-hidden="true">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div class="contact-info-text">
+                <strong>Adress</strong>
+                <span>Mossvägen 4<br>541 52 Skövde</span>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon" aria-hidden="true">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+              <div class="contact-info-text">
+                <strong>Telefon</strong>
+                <a href="tel:+46735443362">073-544 33 62</a>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon" aria-hidden="true">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div class="contact-info-text">
+                <strong>E-post</strong>
+                <a href="mailto:crjfastighet@gmail.com">crjfastighet@gmail.com</a>
+              </div>
+            </div>
+
+            <hr class="contact-divider">
+
+            <h4 style="color: rgba(255,255,255,0.7); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 600; margin-bottom: 16px; font-family: var(--font-body);">Kontorstider</h4>
+            <div class="office-hours">
+              <div class="office-hours-row">
+                <span>Måndag – Fredag</span>
+                <span>08:00–17:00</span>
+              </div>
+              <div class="office-hours-row">
+                <span>Lördag</span>
+                <span>Stängt</span>
+              </div>
+              <div class="office-hours-row">
+                <span>Söndag</span>
+                <span>Stängt</span>
+              </div>
+            </div>
+
+            <hr class="contact-divider">
+
+            <div style="background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.25); border-radius: var(--radius-sm); padding: 14px 16px; font-size: 0.85rem;">
+              <p style="color: rgba(255,255,255,0.8); display: flex; gap: 8px; align-items: flex-start; margin:0;">
+                <i class="fa-solid fa-phone" style="color: #f87171; flex-shrink:0; margin-top:2px;" aria-hidden="true"></i>
+                <span><strong style="color: white;">Akuta ärenden</strong> besvaras dygnet runt på telefon. Ring alltid vid vattenläckor, ström- eller värmeproblem.</span>
+              </p>
+            </div>
+
+            <hr class="contact-divider">
+
+            <div>
+              <p style="font-size: 0.78rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 10px;">Bolagsuppgifter</p>
+              <p style="font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.8;">
+                CRJ Fastighets AB<br>
+                Org.nr: 559218-7032<br>
+                Mossvägen 4, 541 52 Skövde
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MAP ========== -->
+  <section class="section--sm section--grey">
+    <div class="container">
+      <div class="text-center fade-in" style="margin-bottom: 40px;">
+        <span class="section-tag">Hitta oss</span>
+        <h2 class="section-title">Så hittar du till oss</h2>
+        <div class="divider divider--center"></div>
+        <p style="color: var(--text-muted);">Mossvägen 4, 541 52 Skövde</p>
+      </div>
+      <div class="map-container fade-in">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2131.0!2d13.9900!3d58.3880!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465b6adca08d6e0d%3A0x400d18c70e9b7e0!2sMossv%C3%A4gen%204%2C%20541%2052%20Sk%C3%B6vde%2C%20Sweden!5e0!3m2!1ssv!2sse!4v1700000000001!5m2!1ssv!2sse"
+          title="Karta – CRJ Fastigheter, Mossvägen 4, Skövde"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__brand-name">
+            <div class="navbar__logo-mark" style="width:38px;height:38px;font-size:1rem;">CRJ</div>
+            CRJ Fastigheter AB
+          </div>
+          <p class="footer__brand-desc">Välskötta hyresrätter i Skövdeområdet. Trygg förvaltning sedan 2019.</p>
+          <span class="footer__orgnr">Org.nr: 559218-7032</span>
+        </div>
+        <div>
+          <p class="footer__heading">Navigation</p>
+          <ul class="footer__links" role="list">
+            <li><a href="index.html" class="footer__link">Hem</a></li>
+            <li><a href="om-oss.html" class="footer__link">Om oss</a></li>
+            <li><a href="lagenheter.html" class="footer__link">Fastigheter</a></li>
+            <li><a href="lediga.html" class="footer__link">Lediga lägenheter</a></li>
+            <li><a href="hyresgast.html" class="footer__link">För hyresgäster</a></li>
+            <li><a href="kontakt.html" class="footer__link">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Information</p>
+          <ul class="footer__links" role="list">
+            <li><a href="integritetspolicy.html" class="footer__link">Integritetspolicy</a></li>
+            <li><a href="hyresgast.html" class="footer__link">Felanmälan</a></li>
+            <li><a href="lediga.html" class="footer__link">Intresseanmälan</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Kontakt</p>
+          <div class="footer__contact-item"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>Mossvägen 4, 541 52 Skövde</span></div>
+          <div class="footer__contact-item"><i class="fa-solid fa-phone" aria-hidden="true"></i><a href="tel:+46735443362">073-544 33 62</a></div>
+          <div class="footer__contact-item"><i class="fa-solid fa-envelope" aria-hidden="true"></i><a href="mailto:crjfastighet@gmail.com">crjfastighet@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>&copy; 2025 CRJ Fastighets AB (559218-7032). Alla rättigheter förbehållna.</span>
+        <div class="footer__bottom-links">
+          <a href="integritetspolicy.html" class="footer__bottom-link">Integritetspolicy</a>
+          <a href="kontakt.html" class="footer__bottom-link">Kontakt</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookiesamtycke">
+    <div class="container">
+      <div class="cookie-banner__inner">
+        <p class="cookie-banner__text"><i class="fa-solid fa-cookie-bite" aria-hidden="true"></i>&nbsp;Vi använder cookies. Läs mer i vår <a href="integritetspolicy.html">integritetspolicy</a>.</p>
+        <div class="cookie-banner__actions">
+          <button class="cookie-btn cookie-btn--decline">Avböj</button>
+          <button class="cookie-btn cookie-btn--accept">Godkänn</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
