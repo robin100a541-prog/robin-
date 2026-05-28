@@ -31,8 +31,10 @@
           <li><a href="om-oss.html" class="navbar__link">Om oss</a></li>
           <li><a href="lagenheter.html" class="navbar__link">Fastigheter</a></li>
           <li><a href="hyresgast.html" class="navbar__link">För hyresgäster</a></li>
+          <li><a href="bostadsko.html" class="navbar__link">Bostadskö</a></li>
           <li><a href="lediga.html" class="navbar__link navbar__cta">Lediga lägenheter</a></li>
         </ul>
+        <div class="navbar__auth" id="navbar-auth"></div>
         <button class="navbar__hamburger" aria-label="Öppna meny" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -47,8 +49,10 @@
     <a href="om-oss.html" class="navbar__mobile-link">Om oss</a>
     <a href="lagenheter.html" class="navbar__mobile-link">Fastigheter</a>
     <a href="hyresgast.html" class="navbar__mobile-link">För hyresgäster</a>
+    <a href="bostadsko.html" class="navbar__mobile-link">Bostadskö</a>
     <a href="lediga.html" class="navbar__mobile-link">Lediga lägenheter</a>
     <a href="kontakt.html" class="navbar__mobile-link">Kontakt</a>
+    <div id="navbar-mobile-auth"></div>
   </div>
 
   <!-- ========== PAGE HERO ========== -->
@@ -408,6 +412,9 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/auth.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

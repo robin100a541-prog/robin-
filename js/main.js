@@ -175,9 +175,9 @@ function showFormSuccess(form, message) {
 
 /* ---- Init all forms on the page ---- */
 (function initForms() {
-  // Contact form
+  // Contact form — skip if Supabase handler is attached
   const contactForm = document.getElementById('contact-form');
-  if (contactForm) {
+  if (contactForm && !contactForm.dataset.supabaseHandled) {
     contactForm.addEventListener('submit', e => {
       e.preventDefault();
       if (validateForm(contactForm)) {
@@ -186,9 +186,9 @@ function showFormSuccess(form, message) {
     });
   }
 
-  // Interest registration form
+  // Interest registration form — skip if Supabase handler is attached
   const interestForm = document.getElementById('interest-form');
-  if (interestForm) {
+  if (interestForm && !interestForm.dataset.supabaseHandled) {
     interestForm.addEventListener('submit', e => {
       e.preventDefault();
       if (validateForm(interestForm)) {
@@ -197,9 +197,9 @@ function showFormSuccess(form, message) {
     });
   }
 
-  // Fault report form
+  // Fault report form — skip if Supabase handler is attached
   const faultForm = document.getElementById('fault-form');
-  if (faultForm) {
+  if (faultForm && !faultForm.dataset.supabaseHandled) {
     faultForm.addEventListener('submit', e => {
       e.preventDefault();
       if (validateForm(faultForm)) {

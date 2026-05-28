@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Admin – CRJ Fastigheter AB">
+  <title>Admin – CRJ Fastigheter AB</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%231B2C4E'/><text y='.9em' font-size='65' x='50%' text-anchor='middle' font-family='Georgia,serif' fill='%23C8A96E' font-weight='700'>C</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar scrolled" style="position:fixed;" aria-label="Adminnavigation">
+    <div class="container" style="max-width:100%; padding:0 24px;">
+      <div class="navbar__inner">
+        <a href="index.html" class="navbar__logo" aria-label="CRJ Fastigheter AB">
+          <div class="navbar__logo-mark">CRJ</div>
+          <div class="navbar__logo-text">
+            <span class="navbar__logo-name">CRJ Fastigheter</span>
+            <span class="navbar__logo-sub">Administration</span>
+          </div>
+        </a>
+        <div style="display:flex; align-items:center; gap:16px;">
+          <a href="index.html" class="navbar__link" style="font-size:0.85rem;">
+            <i class="fa-solid fa-arrow-left"></i> Tillbaka till sajten
+          </a>
+          <button onclick="logout()" class="btn" style="background:rgba(239,68,68,0.12);color:#dc2626;border:1px solid rgba(239,68,68,0.2);padding:8px 16px;font-size:0.85rem;">
+            <i class="fa-solid fa-right-from-bracket"></i> Logga ut
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== LOADING ========== -->
+  <div id="admin-auth-loading" style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#F0F2F5;padding-top:70px;">
+    <div style="text-align:center;">
+      <div style="width:48px;height:48px;border:3px solid #E2E8F0;border-top-color:#C8A96E;border-radius:50%;animation:adminSpin 0.8s linear infinite;margin:0 auto 16px;"></div>
+      <p style="color:#6B6B6B;font-size:0.9rem;">Kontrollerar behörighet...</p>
+    </div>
+  </div>
+
+  <!-- ========== ADMIN LAYOUT ========== -->
+  <div id="admin-content" style="display:none;" class="admin-page">
+    <div class="admin-layout">
+
+      <!-- Sidebar -->
+      <aside class="admin-sidebar">
+        <div class="admin-sidebar__brand">
+          <div class="admin-sidebar__brand-title">Administratör</div>
+          <div class="admin-sidebar__brand-sub" id="admin-email-display"></div>
+        </div>
+        <nav class="admin-sidebar__nav">
+          <button class="admin-nav-item active" data-panel="overview" onclick="switchPanel('overview', this)">
+            <i class="fa-solid fa-gauge"></i>
+            Översikt
+          </button>
+          <button class="admin-nav-item" data-panel="queue" onclick="switchPanel('queue', this)">
+            <i class="fa-solid fa-list-ol"></i>
+            Bostadskö
+            <span class="admin-nav-badge" id="badge-queue">–</span>
+          </button>
+          <button class="admin-nav-item" data-panel="faults" onclick="switchPanel('faults', this)">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+            Felanmälningar
+            <span class="admin-nav-badge" id="badge-faults">–</span>
+          </button>
+          <button class="admin-nav-item" data-panel="messages" onclick="switchPanel('messages', this)">
+            <i class="fa-solid fa-envelope"></i>
+            Meddelanden
+            <span class="admin-nav-badge" id="badge-messages">–</span>
+          </button>
+          <button class="admin-nav-item" data-panel="tenants" onclick="switchPanel('tenants', this)">
+            <i class="fa-solid fa-users"></i>
+            Hyresgäster
+          </button>
+        </nav>
+        <div class="admin-sidebar__footer">
+          <button onclick="logout()" class="admin-nav-item" style="color:rgba(239,68,68,0.8);">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logga ut
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <main class="admin-main">
+        <div class="admin-topbar">
+          <h1 class="admin-topbar__title" id="panel-title">Översikt</h1>
+          <div class="admin-topbar__user">
+            <div class="admin-topbar__avatar" id="admin-avatar">A</div>
+            <span id="admin-name-display">Admin</span>
+          </div>
+        </div>
+
+        <!-- ===== OVERVIEW PANEL ===== -->
+        <div class="admin-panel active" id="panel-overview">
+          <div class="admin-stats-grid" id="stats-grid">
+            <div class="admin-stat-card">
+              <div class="admin-stat-card__icon admin-stat-card__icon--gold">
+                <i class="fa-solid fa-list-ol"></i>
+              </div>
+              <div>
+                <div class="admin-stat-card__value" id="stat-queue">–</div>
+                <div class="admin-stat-card__label">I bostadskön</div>
+              </div>
+            </div>
+            <div class="admin-stat-card">
+              <div class="admin-stat-card__icon admin-stat-card__icon--red">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+              </div>
+              <div>
+                <div class="admin-stat-card__value" id="stat-faults">–</div>
+                <div class="admin-stat-card__label">Öppna felanmälningar</div>
+              </div>
+            </div>
+            <div class="admin-stat-card">
+              <div class="admin-stat-card__icon admin-stat-card__icon--blue">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div>
+                <div class="admin-stat-card__value" id="stat-messages">–</div>
+                <div class="admin-stat-card__label">Olästa meddelanden</div>
+              </div>
+            </div>
+            <div class="admin-stat-card">
+              <div class="admin-stat-card__icon admin-stat-card__icon--green">
+                <i class="fa-solid fa-users"></i>
+              </div>
+              <div>
+                <div class="admin-stat-card__value" id="stat-tenants">–</div>
+                <div class="admin-stat-card__label">Hyresgäster</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+            <div class="admin-table-wrapper">
+              <div style="padding:20px 20px 12px; border-bottom:1px solid #F0F2F5; font-weight:700; font-size:0.95rem; color:var(--navy);">
+                <i class="fa-solid fa-clock" style="color:var(--gold); margin-right:8px;"></i>
+                Senaste bostadsköanmälningar
+              </div>
+              <div id="overview-queue-recent" style="padding:8px 0;">
+                <div class="admin-loading" style="padding:24px;">
+                  <div class="spinner"></div>
+                </div>
+              </div>
+            </div>
+            <div class="admin-table-wrapper">
+              <div style="padding:20px 20px 12px; border-bottom:1px solid #F0F2F5; font-weight:700; font-size:0.95rem; color:var(--navy);">
+                <i class="fa-solid fa-triangle-exclamation" style="color:#e05252; margin-right:8px;"></i>
+                Senaste felanmälningar
+              </div>
+              <div id="overview-faults-recent" style="padding:8px 0;">
+                <div class="admin-loading" style="padding:24px;">
+                  <div class="spinner"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== QUEUE PANEL ===== -->
+        <div class="admin-panel" id="panel-queue">
+          <div class="admin-section-header">
+            <h2 class="admin-section-title">
+              <i class="fa-solid fa-list-ol"></i>
+              Bostadskö
+            </h2>
+          </div>
+          <div class="admin-table-wrapper">
+            <div id="queue-table-container">
+              <div class="admin-loading"><div class="spinner"></div><p>Laddar...</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== FAULTS PANEL ===== -->
+        <div class="admin-panel" id="panel-faults">
+          <div class="admin-section-header">
+            <h2 class="admin-section-title">
+              <i class="fa-solid fa-screwdriver-wrench"></i>
+              Felanmälningar
+            </h2>
+          </div>
+          <div class="admin-table-wrapper">
+            <div id="faults-table-container">
+              <div class="admin-loading"><div class="spinner"></div><p>Laddar...</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== MESSAGES PANEL ===== -->
+        <div class="admin-panel" id="panel-messages">
+          <div class="admin-section-header">
+            <h2 class="admin-section-title">
+              <i class="fa-solid fa-envelope"></i>
+              Kontaktmeddelanden
+            </h2>
+          </div>
+          <div id="messages-container">
+            <div class="admin-loading"><div class="spinner"></div><p>Laddar...</p></div>
+          </div>
+        </div>
+
+        <!-- ===== TENANTS PANEL ===== -->
+        <div class="admin-panel" id="panel-tenants">
+          <div class="admin-section-header">
+            <h2 class="admin-section-title">
+              <i class="fa-solid fa-users"></i>
+              Användare &amp; hyresgäster
+            </h2>
+          </div>
+          <div class="admin-table-wrapper">
+            <div id="tenants-table-container">
+              <div class="admin-loading"><div class="spinner"></div><p>Laddar...</p></div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    // ---- Helpers ----
+    const statusLabels = {
+      pending: 'Väntande', contacted: 'Kontaktad', approved: 'Godkänd', rejected: 'Avvisad',
+      open: 'Öppen', in_progress: 'Pågår', resolved: 'Löst',
+      unread: 'Oläst', read: 'Läst', replied: 'Besvarad'
+    };
+
+    function statusBadge(s) {
+      return `<span class="status-badge status-badge--${s}">${statusLabels[s] || s}</span>`;
+    }
+
+    function fmtDate(d) {
+      if (!d) return '–';
+      return new Date(d).toLocaleDateString('sv-SE', { year:'numeric', month:'short', day:'numeric' });
+    }
+
+    function escHtml(str) {
+      if (!str) return '–';
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    // ---- Panel switching ----
+    const panelTitles = {
+      overview: 'Översikt', queue: 'Bostadskö', faults: 'Felanmälningar',
+      messages: 'Meddelanden', tenants: 'Hyresgäster'
+    };
+
+    function switchPanel(name, btn) {
+      document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.admin-nav-item').forEach(b => b.classList.remove('active'));
+      document.getElementById('panel-' + name).classList.add('active');
+      if (btn) btn.classList.add('active');
+      document.getElementById('panel-title').textContent = panelTitles[name] || name;
+    }
+
+    // ---- Auth check ----
+    async function initAdmin() {
+      if (!isSupabaseConfigured()) {
+        document.getElementById('admin-auth-loading').innerHTML = `
+          <div style="text-align:center; padding:40px; max-width:480px;">
+            <div style="font-size:2rem; color:#C8A96E; margin-bottom:16px;"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <h2 style="color:#1B2C4E; margin-bottom:12px;">Supabase inte konfigurerat</h2>
+            <p style="color:#6B6B6B; margin-bottom:24px;">Lägg till dina Supabase-nycklar i <code>js/supabase-client.js</code> för att använda admin-dashboarden.</p>
+            <a href="index.html" class="btn btn--outline-navy">Tillbaka till sajten</a>
+          </div>
+        `;
+        return;
+      }
+
+      const user = await requireAdmin();
+      if (!user) return;
+
+      document.getElementById('admin-auth-loading').style.display = 'none';
+      document.getElementById('admin-content').style.display = 'block';
+
+      const name = user.user_metadata?.full_name || user.email;
+      const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+      document.getElementById('admin-avatar').textContent = initials;
+      document.getElementById('admin-name-display').textContent = name.split(' ')[0];
+      document.getElementById('admin-email-display').textContent = user.email;
+
+      loadAllData();
+    }
+
+    // ---- Load all data ----
+    async function loadAllData() {
+      await Promise.all([
+        loadQueue(),
+        loadFaults(),
+        loadMessages(),
+        loadTenants()
+      ]);
+    }
+
+    // ---- Queue ----
+    let queueData = [];
+    async function loadQueue() {
+      const { data, error } = await supabaseClient
+        .from('housing_queue').select('*').order('created_at', { ascending: false });
+
+      if (error || !data) {
+        document.getElementById('queue-table-container').innerHTML = `<div class="admin-empty"><i class="fa-solid fa-triangle-exclamation"></i><p>Kunde inte ladda data. Kontrollera admin-behörighet i Supabase.</p></div>`;
+        return;
+      }
+
+      queueData = data;
+      document.getElementById('stat-queue').textContent = data.length;
+      document.getElementById('badge-queue').textContent = data.filter(r => r.status === 'pending').length || '0';
+
+      renderQueueTable(data);
+      renderOverviewQueue(data.slice(0, 5));
+    }
+
+    function renderQueueTable(data) {
+      if (!data || data.length === 0) {
+        document.getElementById('queue-table-container').innerHTML = `<div class="admin-empty"><i class="fa-solid fa-list-ol"></i><p>Inga bostadsköanmälningar ännu.</p></div>`;
+        return;
+      }
+
+      const rows = data.map(r => `
+        <tr id="qrow-${r.id}">
+          <td>
+            <div class="admin-table__name">${escHtml(r.full_name)}</div>
+            <div class="admin-table__sub">${escHtml(r.email)}</div>
+          </td>
+          <td>${escHtml(r.phone)}</td>
+          <td>${escHtml(r.preferred_size) || '–'}</td>
+          <td>${escHtml(r.move_date) || '–'}</td>
+          <td>${statusBadge(r.status)}</td>
+          <td>${fmtDate(r.created_at)}</td>
+          <td>
+            <select class="status-select" onchange="updateQueueStatus('${r.id}', this.value)">
+              <option value="pending" ${r.status==='pending'?'selected':''}>Väntande</option>
+              <option value="contacted" ${r.status==='contacted'?'selected':''}>Kontaktad</option>
+              <option value="approved" ${r.status==='approved'?'selected':''}>Godkänd</option>
+              <option value="rejected" ${r.status==='rejected'?'selected':''}>Avvisad</option>
+            </select>
+            <textarea class="admin-notes-input" placeholder="Adminkommentar..." id="qnotes-${r.id}">${escHtml(r.admin_notes) === '–' ? '' : (r.admin_notes || '')}</textarea>
+            <br>
+            <button class="admin-action-btn admin-action-btn--save" onclick="saveQueueNotes('${r.id}')">
+              <i class="fa-solid fa-floppy-disk"></i> Spara
+            </button>
+          </td>
+        </tr>
+      `).join('');
+
+      document.getElementById('queue-table-container').innerHTML = `
+        <div style="overflow-x:auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Namn / E-post</th>
+                <th>Telefon</th>
+                <th>Önskad storlek</th>
+                <th>Inflyttning</th>
+                <th>Status</th>
+                <th>Anmäld</th>
+                <th>Åtgärd</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    async function updateQueueStatus(id, status) {
+      await supabaseClient.from('housing_queue').update({ status }).eq('id', id);
+      showToast('Status uppdaterad!', 'success');
+      // Update badge in row
+      const row = document.getElementById('qrow-' + id);
+      if (row) {
+        const badgeCell = row.cells[4];
+        if (badgeCell) badgeCell.innerHTML = statusBadge(status);
+      }
+    }
+
+    async function saveQueueNotes(id) {
+      const notes = document.getElementById('qnotes-' + id).value.trim();
+      await supabaseClient.from('housing_queue').update({ admin_notes: notes }).eq('id', id);
+      showToast('Kommentar sparad!', 'success');
+    }
+
+    function renderOverviewQueue(data) {
+      if (!data || data.length === 0) {
+        document.getElementById('overview-queue-recent').innerHTML = '<div class="admin-empty" style="padding:24px;"><p>Inga anmälningar.</p></div>';
+        return;
+      }
+      const items = data.map(r => `
+        <div style="padding:12px 20px; border-bottom:1px solid #F0F2F5; display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:0.85rem;">
+          <div>
+            <div style="font-weight:600; color:var(--navy);">${escHtml(r.full_name)}</div>
+            <div style="color:var(--text-muted); font-size:0.78rem;">${fmtDate(r.created_at)} · ${escHtml(r.preferred_size) || '?'}</div>
+          </div>
+          ${statusBadge(r.status)}
+        </div>
+      `).join('');
+      document.getElementById('overview-queue-recent').innerHTML = items;
+    }
+
+    // ---- Faults ----
+    async function loadFaults() {
+      const { data, error } = await supabaseClient
+        .from('fault_reports').select('*').order('created_at', { ascending: false });
+
+      if (error || !data) {
+        document.getElementById('faults-table-container').innerHTML = `<div class="admin-empty"><i class="fa-solid fa-triangle-exclamation"></i><p>Kunde inte ladda data.</p></div>`;
+        return;
+      }
+
+      const openCount = data.filter(r => r.status === 'open').length;
+      document.getElementById('stat-faults').textContent = openCount;
+      document.getElementById('badge-faults').textContent = openCount || '0';
+
+      renderFaultsTable(data);
+      renderOverviewFaults(data.slice(0, 5));
+    }
+
+    function renderFaultsTable(data) {
+      if (!data || data.length === 0) {
+        document.getElementById('faults-table-container').innerHTML = `<div class="admin-empty"><i class="fa-solid fa-screwdriver-wrench"></i><p>Inga felanmälningar.</p></div>`;
+        return;
+      }
+
+      const rows = data.map(r => `
+        <tr id="frow-${r.id}">
+          <td>
+            <div class="admin-table__name">${escHtml(r.reporter_name)}</div>
+          </td>
+          <td>${escHtml(r.apartment)}</td>
+          <td>${escHtml(r.phone)}</td>
+          <td>${r.urgency === 'akut' ? '<span class="urgency-akut"><i class="fa-solid fa-triangle-exclamation"></i> Akut</span>' : '<span class="urgency-normal">Normal</span>'}</td>
+          <td><div class="admin-table__desc" title="${escHtml(r.description)}">${escHtml(r.description)?.substring(0, 100)}${(r.description?.length > 100) ? '…' : ''}</div></td>
+          <td>${statusBadge(r.status)}</td>
+          <td>${fmtDate(r.created_at)}</td>
+          <td>
+            <select class="status-select" onchange="updateFaultStatus('${r.id}', this.value)">
+              <option value="open" ${r.status==='open'?'selected':''}>Öppen</option>
+              <option value="in_progress" ${r.status==='in_progress'?'selected':''}>Pågår</option>
+              <option value="resolved" ${r.status==='resolved'?'selected':''}>Löst</option>
+            </select>
+            <textarea class="admin-notes-input" placeholder="Adminkommentar..." id="fnotes-${r.id}">${r.admin_notes || ''}</textarea>
+            <br>
+            <button class="admin-action-btn admin-action-btn--save" onclick="saveFaultNotes('${r.id}')">
+              <i class="fa-solid fa-floppy-disk"></i> Spara
+            </button>
+          </td>
+        </tr>
+      `).join('');
+
+      document.getElementById('faults-table-container').innerHTML = `
+        <div style="overflow-x:auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Namn</th>
+                <th>Lägenhet</th>
+                <th>Telefon</th>
+                <th>Prioritet</th>
+                <th>Beskrivning</th>
+                <th>Status</th>
+                <th>Datum</th>
+                <th>Åtgärd</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    async function updateFaultStatus(id, status) {
+      await supabaseClient.from('fault_reports').update({ status }).eq('id', id);
+      showToast('Status uppdaterad!', 'success');
+      const row = document.getElementById('frow-' + id);
+      if (row) row.cells[5].innerHTML = statusBadge(status);
+    }
+
+    async function saveFaultNotes(id) {
+      const notes = document.getElementById('fnotes-' + id).value.trim();
+      await supabaseClient.from('fault_reports').update({ admin_notes: notes }).eq('id', id);
+      showToast('Kommentar sparad!', 'success');
+    }
+
+    function renderOverviewFaults(data) {
+      if (!data || data.length === 0) {
+        document.getElementById('overview-faults-recent').innerHTML = '<div class="admin-empty" style="padding:24px;"><p>Inga felanmälningar.</p></div>';
+        return;
+      }
+      const items = data.map(r => `
+        <div style="padding:12px 20px; border-bottom:1px solid #F0F2F5; display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:0.85rem;">
+          <div>
+            <div style="font-weight:600; color:var(--navy);">${escHtml(r.reporter_name)} – ${escHtml(r.apartment)}</div>
+            <div style="color:var(--text-muted); font-size:0.78rem;">${fmtDate(r.created_at)}</div>
+          </div>
+          ${statusBadge(r.status)}
+        </div>
+      `).join('');
+      document.getElementById('overview-faults-recent').innerHTML = items;
+    }
+
+    // ---- Messages ----
+    async function loadMessages() {
+      const { data, error } = await supabaseClient
+        .from('contact_messages').select('*').order('created_at', { ascending: false });
+
+      if (error || !data) {
+        document.getElementById('messages-container').innerHTML = `<div class="admin-empty"><i class="fa-solid fa-triangle-exclamation"></i><p>Kunde inte ladda data.</p></div>`;
+        return;
+      }
+
+      const unreadCount = data.filter(m => m.status === 'unread').length;
+      document.getElementById('stat-messages').textContent = unreadCount;
+      document.getElementById('badge-messages').textContent = unreadCount || '0';
+
+      if (data.length === 0) {
+        document.getElementById('messages-container').innerHTML = `<div class="admin-empty"><i class="fa-solid fa-envelope"></i><p>Inga meddelanden.</p></div>`;
+        return;
+      }
+
+      const cards = data.map(m => `
+        <div class="admin-message-card ${m.status}" id="mcard-${m.id}">
+          <div class="admin-message-card__header">
+            <div>
+              <div style="font-weight:700; color:var(--navy); font-size:0.95rem;">${escHtml(m.name)}</div>
+              <div class="admin-message-card__meta">
+                <a href="mailto:${escHtml(m.email)}" style="color:var(--gold-dark);">${escHtml(m.email)}</a>
+                ${m.phone ? ` · <a href="tel:${escHtml(m.phone)}">${escHtml(m.phone)}</a>` : ''}
+                · ${fmtDate(m.created_at)}
+                ${m.subject ? ` · <strong>${escHtml(m.subject)}</strong>` : ''}
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:8px; flex-shrink:0;">
+              ${statusBadge(m.status)}
+              ${m.status === 'unread' ? `<button class="admin-action-btn admin-action-btn--read" onclick="markMessageRead('${m.id}')"><i class="fa-solid fa-check"></i> Markera läst</button>` : ''}
+              ${m.status !== 'replied' ? `<button class="admin-action-btn admin-action-btn--save" onclick="markMessageReplied('${m.id}')"><i class="fa-solid fa-reply"></i> Besvarad</button>` : ''}
+            </div>
+          </div>
+          <div class="admin-message-card__body">${escHtml(m.message)}</div>
+        </div>
+      `).join('');
+
+      document.getElementById('messages-container').innerHTML = `<div style="padding:24px;">${cards}</div>`;
+    }
+
+    async function markMessageRead(id) {
+      await supabaseClient.from('contact_messages').update({ status: 'read' }).eq('id', id);
+      showToast('Markerad som läst', 'success');
+      await loadMessages();
+    }
+
+    async function markMessageReplied(id) {
+      await supabaseClient.from('contact_messages').update({ status: 'replied' }).eq('id', id);
+      showToast('Markerad som besvarad', 'success');
+      await loadMessages();
+    }
+
+    // ---- Tenants ----
+    async function loadTenants() {
+      const { data, error } = await supabaseClient
+        .from('profiles').select('*').order('created_at', { ascending: false });
+
+      if (error || !data) {
+        document.getElementById('tenants-table-container').innerHTML = `<div class="admin-empty"><i class="fa-solid fa-triangle-exclamation"></i><p>Kunde inte ladda data.</p></div>`;
+        return;
+      }
+
+      const tenantCount = data.filter(p => p.is_tenant).length;
+      document.getElementById('stat-tenants').textContent = tenantCount;
+
+      if (data.length === 0) {
+        document.getElementById('tenants-table-container').innerHTML = `<div class="admin-empty"><i class="fa-solid fa-users"></i><p>Inga användare registrerade.</p></div>`;
+        return;
+      }
+
+      const rows = data.map(p => `
+        <tr>
+          <td>
+            <div class="admin-table__name">${escHtml(p.full_name) || '–'}</div>
+            <div class="admin-table__sub">${escHtml(p.email)}</div>
+          </td>
+          <td>${escHtml(p.phone) || '–'}</td>
+          <td>${escHtml(p.apartment) || '–'}</td>
+          <td>${p.is_tenant ? '<span class="status-badge status-badge--approved"><i class="fa-solid fa-check"></i> Hyresgäst</span>' : '<span class="status-badge status-badge--read">Intressent</span>'}</td>
+          <td>${p.is_admin ? '<span class="status-badge status-badge--contacted"><i class="fa-solid fa-shield-halved"></i> Admin</span>' : '–'}</td>
+          <td>${fmtDate(p.created_at)}</td>
+          <td>
+            <button class="admin-action-btn admin-action-btn--toggle" onclick="toggleTenant('${p.id}', ${!p.is_tenant})">
+              <i class="fa-solid fa-house-user"></i>
+              ${p.is_tenant ? 'Ta bort hyresgäst' : 'Sätt som hyresgäst'}
+            </button>
+          </td>
+        </tr>
+      `).join('');
+
+      document.getElementById('tenants-table-container').innerHTML = `
+        <div style="overflow-x:auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Namn / E-post</th>
+                <th>Telefon</th>
+                <th>Lägenhet</th>
+                <th>Roll</th>
+                <th>Admin</th>
+                <th>Registrerad</th>
+                <th>Åtgärd</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    async function toggleTenant(id, isTenant) {
+      await supabaseClient.from('profiles').update({ is_tenant: isTenant }).eq('id', id);
+      showToast(isTenant ? 'Satt som hyresgäst' : 'Hyresgäststatus borttagen', 'success');
+      loadTenants();
+    }
+
+    document.addEventListener('DOMContentLoaded', initAdmin);
+  </script>
+</body>
+</html>

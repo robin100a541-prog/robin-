@@ -31,8 +31,10 @@
           <li><a href="om-oss.html" class="navbar__link">Om oss</a></li>
           <li><a href="lagenheter.html" class="navbar__link">Fastigheter</a></li>
           <li><a href="hyresgast.html" class="navbar__link">För hyresgäster</a></li>
+          <li><a href="bostadsko.html" class="navbar__link">Bostadskö</a></li>
           <li><a href="lediga.html" class="navbar__link navbar__cta">Lediga lägenheter</a></li>
         </ul>
+        <div class="navbar__auth" id="navbar-auth"></div>
         <button class="navbar__hamburger" aria-label="Öppna meny" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -47,8 +49,10 @@
     <a href="om-oss.html" class="navbar__mobile-link">Om oss</a>
     <a href="lagenheter.html" class="navbar__mobile-link">Fastigheter</a>
     <a href="hyresgast.html" class="navbar__mobile-link">För hyresgäster</a>
+    <a href="bostadsko.html" class="navbar__mobile-link">Bostadskö</a>
     <a href="lediga.html" class="navbar__mobile-link">Lediga lägenheter</a>
     <a href="kontakt.html" class="navbar__mobile-link">Kontakt</a>
+    <div id="navbar-mobile-auth"></div>
   </div>
 
   <!-- ========== PAGE HERO ========== -->
@@ -307,6 +311,86 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    // Mark form BEFORE main.js loads, so main.js skips its default handler
+    (function() { const f = document.getElementById('contact-form'); if (f) f.dataset.supabaseHandled = 'true'; })();
+  </script>
   <script src="js/main.js"></script>
+  <script>
+    // Pre-fill contact form if user is logged in
+    (async () => {
+      if (!isSupabaseConfigured()) return;
+      const user = await getCurrentUser();
+      if (!user) return;
+      const { data: profile } = await supabaseClient.from('profiles').select('*').eq('id', user.id).single();
+      document.getElementById('contact-email').value = user.email || '';
+      if (profile?.full_name) document.getElementById('contact-name').value = profile.full_name;
+      else if (user.user_metadata?.full_name) document.getElementById('contact-name').value = user.user_metadata.full_name;
+      if (profile?.phone) document.getElementById('contact-phone').value = profile.phone;
+      else if (user.user_metadata?.phone) document.getElementById('contact-phone').value = user.user_metadata.phone;
+    })();
+
+    // Override contact form submission
+    document.addEventListener('DOMContentLoaded', () => {
+      const contactForm = document.getElementById('contact-form');
+      if (!contactForm) return;
+
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('contact-name').value.trim();
+        const email = document.getElementById('contact-email').value.trim();
+        const phone = document.getElementById('contact-phone').value.trim();
+        const subject = document.getElementById('contact-subject').value;
+        const message = document.getElementById('contact-message').value.trim();
+
+        if (!name || !email || !message) {
+          if (typeof validateForm === 'function') validateForm(contactForm);
+          return;
+        }
+
+        if (!isSupabaseConfigured()) {
+          if (typeof showFormSuccess === 'function') {
+            showFormSuccess(contactForm, 'Tack för ditt meddelande! Vi svarar inom 1–2 arbetsdagar.');
+          }
+          return;
+        }
+
+        const submitBtn = contactForm.querySelector('[type="submit"]');
+        const originalHtml = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner" style="width:18px;height:18px;border-width:2px;display:inline-block;margin-right:8px;vertical-align:middle;"></span> Skickar...';
+
+        try {
+          const user = await getCurrentUser();
+          const { error } = await supabaseClient.from('contact_messages').insert([{
+            name,
+            email,
+            phone: phone || null,
+            subject: subject || null,
+            message,
+            user_id: user ? user.id : null
+          }]);
+
+          if (error) {
+            showToast('Något gick fel. Försök igen eller ring oss direkt.', 'error');
+          } else {
+            if (typeof showFormSuccess === 'function') {
+              showFormSuccess(contactForm, 'Tack för ditt meddelande! Vi svarar inom 1–2 arbetsdagar.');
+            }
+            showToast('Meddelande skickat!', 'success');
+          }
+        } catch (err) {
+          showToast('Något gick fel. Försök igen.', 'error');
+        }
+
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalHtml;
+      }, true);
+    });
+  </script>
 </body>
 </html>

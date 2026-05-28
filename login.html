@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Logga in eller skapa konto – CRJ Fastigheter AB">
+  <title>Logga in – CRJ Fastigheter AB</title>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%231B2C4E'/><text y='.9em' font-size='65' x='50%' text-anchor='middle' font-family='Georgia,serif' fill='%23C8A96E' font-weight='700'>C</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .login-page {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 50%, var(--navy-light) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 24px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .login-page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(200,169,110,0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .login-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      z-index: 1;
+    }
+
+    .login-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+      text-decoration: none;
+    }
+
+    .login-logo-mark {
+      width: 44px;
+      height: 44px;
+      background: var(--gold);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--navy);
+    }
+
+    .login-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .login-logo-name {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--navy);
+    }
+
+    .login-logo-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .login-tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 32px;
+      border-bottom: 2px solid var(--grey-mid);
+    }
+
+    .login-tab {
+      flex: 1;
+      padding: 12px 16px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -2px;
+      font-family: var(--font-body);
+    }
+
+    .login-tab.active {
+      color: var(--navy);
+      border-bottom-color: var(--gold);
+    }
+
+    .login-tab:hover:not(.active) {
+      color: var(--navy);
+    }
+
+    .login-panel {
+      display: none;
+    }
+
+    .login-panel.active {
+      display: block;
+    }
+
+    .login-title {
+      font-size: 1.6rem;
+      color: var(--navy);
+      margin-bottom: 8px;
+      font-family: var(--font-heading);
+    }
+
+    .login-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+
+    .login-error {
+      background: rgba(224,82,82,0.1);
+      border: 1px solid rgba(224,82,82,0.3);
+      color: #c0392b;
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      font-size: 0.88rem;
+      margin-bottom: 20px;
+      display: none;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .login-error.visible {
+      display: flex;
+    }
+
+    .login-success {
+      background: rgba(72,187,120,0.12);
+      border: 1px solid rgba(72,187,120,0.4);
+      color: #276749;
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      display: none;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.5;
+    }
+
+    .login-success.visible {
+      display: flex;
+    }
+
+    .login-btn {
+      width: 100%;
+      justify-content: center;
+      padding: 16px;
+      font-size: 1rem;
+    }
+
+    .login-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .login-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 24px 0;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    .login-divider::before,
+    .login-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--grey-mid);
+    }
+
+    .login-forgot {
+      display: block;
+      text-align: right;
+      font-size: 0.82rem;
+      color: var(--gold-dark);
+      font-weight: 500;
+      margin-top: -8px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: var(--font-body);
+    }
+
+    .login-forgot:hover {
+      text-decoration: underline;
+    }
+
+    .login-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 24px;
+      transition: color 0.2s;
+    }
+
+    .login-back:hover {
+      color: var(--navy);
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(27,44,78,0.2);
+      border-top-color: var(--navy);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    .btn--primary .loading-spinner {
+      border-color: rgba(255,255,255,0.3);
+      border-top-color: white;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .password-field {
+      position: relative;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .password-toggle:hover {
+      color: var(--navy);
+    }
+
+    .password-field input {
+      padding-right: 44px;
+    }
+
+    @media (max-width: 520px) {
+      .login-card {
+        padding: 32px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar scrolled" aria-label="Huvudnavigation">
+    <div class="container">
+      <div class="navbar__inner">
+        <a href="index.html" class="navbar__logo" aria-label="CRJ Fastigheter AB – Startsida">
+          <div class="navbar__logo-mark">CRJ</div>
+          <div class="navbar__logo-text">
+            <span class="navbar__logo-name">CRJ Fastigheter</span>
+            <span class="navbar__logo-sub">Fastighets AB</span>
+          </div>
+        </a>
+        <ul class="navbar__nav" role="list">
+          <li><a href="index.html" class="navbar__link">Hem</a></li>
+          <li><a href="om-oss.html" class="navbar__link">Om oss</a></li>
+          <li><a href="lagenheter.html" class="navbar__link">Fastigheter</a></li>
+          <li><a href="hyresgast.html" class="navbar__link">För hyresgäster</a></li>
+          <li><a href="bostadsko.html" class="navbar__link">Bostadskö</a></li>
+          <li><a href="lediga.html" class="navbar__link navbar__cta">Lediga lägenheter</a></li>
+        </ul>
+        <div class="navbar__auth" id="navbar-auth"></div>
+        <button class="navbar__hamburger" aria-label="Öppna meny" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="navbar__mobile" role="dialog" aria-label="Mobilmeny">
+    <button class="navbar__mobile-close" aria-label="Stäng meny"><i class="fa-solid fa-xmark"></i></button>
+    <a href="index.html" class="navbar__mobile-link">Hem</a>
+    <a href="om-oss.html" class="navbar__mobile-link">Om oss</a>
+    <a href="lagenheter.html" class="navbar__mobile-link">Fastigheter</a>
+    <a href="hyresgast.html" class="navbar__mobile-link">För hyresgäster</a>
+    <a href="bostadsko.html" class="navbar__mobile-link">Bostadskö</a>
+    <a href="lediga.html" class="navbar__mobile-link">Lediga lägenheter</a>
+    <a href="kontakt.html" class="navbar__mobile-link">Kontakt</a>
+    <div id="navbar-mobile-auth"></div>
+  </div>
+
+  <!-- ========== LOGIN PAGE ========== -->
+  <div class="login-page">
+    <div class="login-card">
+
+      <a href="index.html" class="login-logo" aria-label="Tillbaka till startsidan">
+        <div class="login-logo-mark">CRJ</div>
+        <div class="login-logo-text">
+          <span class="login-logo-name">CRJ Fastigheter</span>
+          <span class="login-logo-sub">Fastighets AB</span>
+        </div>
+      </a>
+
+      <!-- Tabs -->
+      <div class="login-tabs" role="tablist">
+        <button class="login-tab active" id="tab-login" role="tab" aria-selected="true" aria-controls="panel-login">Logga in</button>
+        <button class="login-tab" id="tab-register" role="tab" aria-selected="false" aria-controls="panel-register">Skapa konto</button>
+      </div>
+
+      <!-- ===== LOGIN PANEL ===== -->
+      <div class="login-panel active" id="panel-login" role="tabpanel" aria-labelledby="tab-login">
+        <h2 class="login-title">Välkommen tillbaka</h2>
+        <p class="login-subtitle">Logga in på ditt konto för att se din status i bostadskön och dina felanmälningar.</p>
+
+        <div class="login-error" id="login-error" role="alert">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span id="login-error-text"></span>
+        </div>
+
+        <form id="login-form" novalidate>
+          <div class="form-group">
+            <label for="login-email">E-postadress <span style="color:#e05252;">*</span></label>
+            <input type="email" id="login-email" name="email" placeholder="din@epost.se" required autocomplete="email">
+            <span class="form-error" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="login-password">Lösenord <span style="color:#e05252;">*</span></label>
+            <div class="password-field">
+              <input type="password" id="login-password" name="password" placeholder="Ditt lösenord" required autocomplete="current-password">
+              <button type="button" class="password-toggle" aria-label="Visa/dölj lösenord" data-target="login-password">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+            <span class="form-error" aria-live="polite"></span>
+          </div>
+
+          <button type="button" class="login-forgot" id="forgot-password-btn">Glömt lösenordet?</button>
+
+          <button type="submit" class="btn btn--primary login-btn" id="login-submit-btn">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            Logga in
+          </button>
+        </form>
+
+        <div class="login-divider">eller</div>
+
+        <p style="text-align: center; font-size: 0.88rem; color: var(--text-muted);">
+          Har du inget konto?
+          <button onclick="switchTab('register')" style="background:none;border:none;color:var(--gold-dark);font-weight:600;cursor:pointer;font-family:inherit;font-size:inherit;">Skapa konto</button>
+        </p>
+
+        <a href="index.html" class="login-back">
+          <i class="fa-solid fa-arrow-left"></i>
+          Tillbaka till startsidan
+        </a>
+      </div>
+
+      <!-- ===== REGISTER PANEL ===== -->
+      <div class="login-panel" id="panel-register" role="tabpanel" aria-labelledby="tab-register">
+        <h2 class="login-title">Skapa konto</h2>
+        <p class="login-subtitle">Registrera dig för att hålla koll på din plats i bostadskön och dina felanmälningar.</p>
+
+        <div class="login-error" id="register-error" role="alert">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <span id="register-error-text"></span>
+        </div>
+
+        <div class="login-success" id="register-success" role="alert">
+          <i class="fa-solid fa-circle-check" style="color: #276749; flex-shrink:0; margin-top:2px;"></i>
+          <span>Ditt konto har skapats! Kontrollera din e-post för att bekräfta din adress. Därefter kan du logga in.</span>
+        </div>
+
+        <form id="register-form" novalidate>
+          <div class="form-group">
+            <label for="reg-name">För- och efternamn <span style="color:#e05252;">*</span></label>
+            <input type="text" id="reg-name" name="full_name" placeholder="Anna Andersson" required autocomplete="name">
+            <span class="form-error" aria-live="polite"></span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reg-email">E-postadress <span style="color:#e05252;">*</span></label>
+              <input type="email" id="reg-email" name="email" placeholder="din@epost.se" required autocomplete="email">
+              <span class="form-error" aria-live="polite"></span>
+            </div>
+            <div class="form-group">
+              <label for="reg-phone">Telefonnummer</label>
+              <input type="tel" id="reg-phone" name="phone" placeholder="070-123 45 67" autocomplete="tel">
+              <span class="form-error" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="reg-password">Lösenord <span style="color:#e05252;">*</span></label>
+            <div class="password-field">
+              <input type="password" id="reg-password" name="password" placeholder="Minst 8 tecken" required autocomplete="new-password" minlength="8">
+              <button type="button" class="password-toggle" aria-label="Visa/dölj lösenord" data-target="reg-password">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+            <span class="form-error" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="reg-password2">Bekräfta lösenord <span style="color:#e05252;">*</span></label>
+            <div class="password-field">
+              <input type="password" id="reg-password2" name="password2" placeholder="Upprepa lösenordet" required autocomplete="new-password">
+              <button type="button" class="password-toggle" aria-label="Visa/dölj lösenord" data-target="reg-password2">
+                <i class="fa-regular fa-eye"></i>
+              </button>
+            </div>
+            <span class="form-error" aria-live="polite"></span>
+          </div>
+
+          <div style="background: var(--grey-light); border-radius: var(--radius-sm); padding: 12px 16px; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px; display: flex; gap: 8px; align-items: flex-start;">
+            <i class="fa-solid fa-shield-halved" style="color: var(--gold); margin-top: 2px; flex-shrink:0;"></i>
+            <span>Vi behandlar dina uppgifter enligt GDPR. Läs vår <a href="integritetspolicy.html" style="color: var(--navy); font-weight:500;">integritetspolicy</a>.</span>
+          </div>
+
+          <button type="submit" class="btn btn--primary login-btn" id="register-submit-btn">
+            <i class="fa-solid fa-user-plus"></i>
+            Skapa konto
+          </button>
+        </form>
+
+        <div class="login-divider">eller</div>
+
+        <p style="text-align: center; font-size: 0.88rem; color: var(--text-muted);">
+          Har du redan konto?
+          <button onclick="switchTab('login')" style="background:none;border:none;color:var(--gold-dark);font-weight:600;cursor:pointer;font-family:inherit;font-size:inherit;">Logga in</button>
+        </p>
+
+        <a href="index.html" class="login-back">
+          <i class="fa-solid fa-arrow-left"></i>
+          Tillbaka till startsidan
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Forgot password modal (hidden) -->
+  <div id="forgot-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center; padding:24px;">
+    <div style="background:white; border-radius:var(--radius-lg); padding:40px; max-width:420px; width:100%; box-shadow:var(--shadow-lg);">
+      <h3 style="margin-bottom:8px; font-size:1.3rem;">Återställ lösenord</h3>
+      <p style="margin-bottom:24px; font-size:0.9rem; color:var(--text-muted);">Ange din e-postadress så skickar vi en återställningslänk.</p>
+      <div class="login-error" id="forgot-error" role="alert">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <span id="forgot-error-text"></span>
+      </div>
+      <div class="login-success" id="forgot-success" role="alert">
+        <i class="fa-solid fa-circle-check" style="color:#276749; flex-shrink:0;"></i>
+        <span>En återställningslänk har skickats till din e-postadress.</span>
+      </div>
+      <div class="form-group">
+        <label for="forgot-email">E-postadress</label>
+        <input type="email" id="forgot-email" placeholder="din@epost.se">
+      </div>
+      <div style="display:flex; gap:12px; margin-top:8px;">
+        <button onclick="closeForgotModal()" class="btn btn--outline-navy" style="flex:1; justify-content:center; padding:12px;">Avbryt</button>
+        <button onclick="sendPasswordReset()" class="btn btn--primary" id="forgot-submit-btn" style="flex:1; justify-content:center; padding:12px;">Skicka</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // ---- Tab switching ----
+    function switchTab(tab) {
+      const loginTab = document.getElementById('tab-login');
+      const registerTab = document.getElementById('tab-register');
+      const loginPanel = document.getElementById('panel-login');
+      const registerPanel = document.getElementById('panel-register');
+
+      if (tab === 'login') {
+        loginTab.classList.add('active');
+        registerTab.classList.remove('active');
+        loginPanel.classList.add('active');
+        registerPanel.classList.remove('active');
+        loginTab.setAttribute('aria-selected', 'true');
+        registerTab.setAttribute('aria-selected', 'false');
+      } else {
+        registerTab.classList.add('active');
+        loginTab.classList.remove('active');
+        registerPanel.classList.add('active');
+        loginPanel.classList.remove('active');
+        registerTab.setAttribute('aria-selected', 'true');
+        loginTab.setAttribute('aria-selected', 'false');
+      }
+    }
+
+    document.getElementById('tab-login').addEventListener('click', () => switchTab('login'));
+    document.getElementById('tab-register').addEventListener('click', () => switchTab('register'));
+
+    // Check URL hash for tab
+    if (window.location.hash === '#register') switchTab('register');
+
+    // ---- Password toggle ----
+    document.querySelectorAll('.password-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.dataset.target;
+        const input = document.getElementById(targetId);
+        const icon = btn.querySelector('i');
+        if (input.type === 'password') {
+          input.type = 'text';
+          icon.className = 'fa-regular fa-eye-slash';
+        } else {
+          input.type = 'password';
+          icon.className = 'fa-regular fa-eye';
+        }
+      });
+    });
+
+    // ---- Helpers ----
+    function setLoading(btnId, loading) {
+      const btn = document.getElementById(btnId);
+      if (!btn) return;
+      btn.disabled = loading;
+      if (loading) {
+        btn.dataset.originalHtml = btn.innerHTML;
+        btn.innerHTML = '<span class="loading-spinner"></span> Vänta...';
+      } else {
+        btn.innerHTML = btn.dataset.originalHtml || btn.innerHTML;
+      }
+    }
+
+    function showError(containerId, textId, msg) {
+      document.getElementById(textId).textContent = msg;
+      document.getElementById(containerId).classList.add('visible');
+    }
+
+    function hideError(containerId) {
+      document.getElementById(containerId).classList.remove('visible');
+    }
+
+    // ---- Login Form ----
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideError('login-error');
+
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      if (!email || !password) {
+        showError('login-error', 'login-error-text', 'Fyll i e-post och lösenord.');
+        return;
+      }
+
+      if (!isSupabaseConfigured()) {
+        showError('login-error', 'login-error-text', 'Supabase är inte konfigurerat ännu. Sätt upp dina Supabase-nycklar i js/supabase-client.js.');
+        return;
+      }
+
+      setLoading('login-submit-btn', true);
+
+      try {
+        const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+
+        if (error) {
+          let msg = 'Fel e-post eller lösenord. Försök igen.';
+          if (error.message?.includes('Email not confirmed')) {
+            msg = 'E-postadressen är inte bekräftad. Kontrollera din inkorg.';
+          } else if (error.message?.includes('Invalid login')) {
+            msg = 'Fel e-post eller lösenord. Försök igen.';
+          }
+          showError('login-error', 'login-error-text', msg);
+          setLoading('login-submit-btn', false);
+          return;
+        }
+
+        const user = data.user;
+        const next = new URLSearchParams(window.location.search).get('next');
+
+        if (getAdminStatus(user)) {
+          window.location.href = 'admin.html';
+        } else if (next) {
+          window.location.href = decodeURIComponent(next);
+        } else {
+          window.location.href = 'dashboard.html';
+        }
+
+      } catch (err) {
+        showError('login-error', 'login-error-text', 'Något gick fel. Försök igen senare.');
+        setLoading('login-submit-btn', false);
+      }
+    });
+
+    // ---- Register Form ----
+    document.getElementById('register-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideError('register-error');
+      document.getElementById('register-success').classList.remove('visible');
+
+      const fullName = document.getElementById('reg-name').value.trim();
+      const email = document.getElementById('reg-email').value.trim();
+      const phone = document.getElementById('reg-phone').value.trim();
+      const password = document.getElementById('reg-password').value;
+      const password2 = document.getElementById('reg-password2').value;
+
+      if (!fullName || !email || !password || !password2) {
+        showError('register-error', 'register-error-text', 'Fyll i alla obligatoriska fält.');
+        return;
+      }
+
+      if (password.length < 8) {
+        showError('register-error', 'register-error-text', 'Lösenordet måste vara minst 8 tecken.');
+        return;
+      }
+
+      if (password !== password2) {
+        showError('register-error', 'register-error-text', 'Lösenorden matchar inte.');
+        return;
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showError('register-error', 'register-error-text', 'Ange en giltig e-postadress.');
+        return;
+      }
+
+      if (!isSupabaseConfigured()) {
+        showError('register-error', 'register-error-text', 'Supabase är inte konfigurerat ännu. Sätt upp dina Supabase-nycklar i js/supabase-client.js.');
+        return;
+      }
+
+      setLoading('register-submit-btn', true);
+
+      try {
+        const { data, error } = await supabaseClient.auth.signUp({
+          email,
+          password,
+          options: {
+            data: { full_name: fullName, phone }
+          }
+        });
+
+        if (error) {
+          let msg = 'Registreringen misslyckades. Försök igen.';
+          if (error.message?.includes('already registered') || error.message?.includes('User already registered')) {
+            msg = 'E-postadressen används redan. Logga in istället.';
+          } else if (error.message?.includes('Password')) {
+            msg = 'Lösenordet är för svagt. Välj ett starkare lösenord.';
+          }
+          showError('register-error', 'register-error-text', msg);
+          setLoading('register-submit-btn', false);
+          return;
+        }
+
+        // Update profile with phone
+        if (data.user && phone) {
+          await supabaseClient.from('profiles').update({ phone }).eq('id', data.user.id);
+        }
+
+        document.getElementById('register-success').classList.add('visible');
+        document.getElementById('register-form').reset();
+
+        // If auto-confirmed (no email verification required), redirect
+        if (data.session) {
+          setTimeout(() => {
+            window.location.href = 'dashboard.html';
+          }, 2000);
+        }
+
+      } catch (err) {
+        showError('register-error', 'register-error-text', 'Något gick fel. Försök igen senare.');
+      }
+
+      setLoading('register-submit-btn', false);
+    });
+
+    // ---- Forgot Password ----
+    document.getElementById('forgot-password-btn').addEventListener('click', () => {
+      document.getElementById('forgot-modal').style.display = 'flex';
+      document.getElementById('forgot-error').classList.remove('visible');
+      document.getElementById('forgot-success').classList.remove('visible');
+    });
+
+    function closeForgotModal() {
+      document.getElementById('forgot-modal').style.display = 'none';
+    }
+
+    async function sendPasswordReset() {
+      const email = document.getElementById('forgot-email').value.trim();
+      document.getElementById('forgot-error').classList.remove('visible');
+      document.getElementById('forgot-success').classList.remove('visible');
+
+      if (!email) {
+        document.getElementById('forgot-error-text').textContent = 'Ange din e-postadress.';
+        document.getElementById('forgot-error').classList.add('visible');
+        return;
+      }
+
+      if (!isSupabaseConfigured()) {
+        document.getElementById('forgot-error-text').textContent = 'Supabase är inte konfigurerat ännu.';
+        document.getElementById('forgot-error').classList.add('visible');
+        return;
+      }
+
+      const btn = document.getElementById('forgot-submit-btn');
+      btn.disabled = true;
+      btn.textContent = 'Skickar...';
+
+      const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin + '/login.html'
+      });
+
+      btn.disabled = false;
+      btn.textContent = 'Skicka';
+
+      if (error) {
+        document.getElementById('forgot-error-text').textContent = 'Något gick fel. Kontrollera e-postadressen.';
+        document.getElementById('forgot-error').classList.add('visible');
+      } else {
+        document.getElementById('forgot-success').classList.add('visible');
+        setTimeout(closeForgotModal, 3000);
+      }
+    }
+
+    // Close modal on backdrop click
+    document.getElementById('forgot-modal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('forgot-modal')) closeForgotModal();
+    });
+
+    // If already logged in, redirect
+    (async () => {
+      if (!isSupabaseConfigured()) return;
+      const user = await getCurrentUser();
+      if (user) {
+        window.location.href = getAdminStatus(user) ? 'admin.html' : 'dashboard.html';
+      }
+    })();
+  </script>
+</body>
+</html>

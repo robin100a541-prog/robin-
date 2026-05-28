@@ -31,8 +31,10 @@
           <li><a href="om-oss.html" class="navbar__link">Om oss</a></li>
           <li><a href="lagenheter.html" class="navbar__link">Fastigheter</a></li>
           <li><a href="hyresgast.html" class="navbar__link">För hyresgäster</a></li>
-          <li><a href="lediga.html" class="navbar__link navbar__cta">Lediga lägenheter</a></li>
+          <li><a href="bostadsko.html" class="navbar__link">Bostadskö</a></li>
+          <li><a href="lediga.html" class="navbar__link navbar__cta active">Lediga lägenheter</a></li>
         </ul>
+        <div class="navbar__auth" id="navbar-auth"></div>
         <button class="navbar__hamburger" aria-label="Öppna meny" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -47,8 +49,10 @@
     <a href="om-oss.html" class="navbar__mobile-link">Om oss</a>
     <a href="lagenheter.html" class="navbar__mobile-link">Fastigheter</a>
     <a href="hyresgast.html" class="navbar__mobile-link">För hyresgäster</a>
+    <a href="bostadsko.html" class="navbar__mobile-link">Bostadskö</a>
     <a href="lediga.html" class="navbar__mobile-link">Lediga lägenheter</a>
     <a href="kontakt.html" class="navbar__mobile-link">Kontakt</a>
+    <div id="navbar-mobile-auth"></div>
   </div>
 
   <!-- ========== PAGE HERO ========== -->
@@ -147,6 +151,12 @@
           Fyll i formuläret nedan. Vi sparar dina uppgifter i enlighet med
           <a href="integritetspolicy.html" style="color: var(--navy); text-decoration: underline; font-weight: 500;">vår integritetspolicy</a>
           och kontaktar dig när en passande lägenhet finns tillgänglig.
+        </p>
+        <p style="margin-top: 12px; font-size: 0.9rem; color: var(--text-muted);">
+          <i class="fa-solid fa-list-ol" style="color: var(--gold);"></i>
+          Vill du spåra din ansökan? Använd vår
+          <a href="bostadsko.html" style="color: var(--navy); font-weight: 600;">officiella bostadskö</a>
+          där du kan följa statusen efter inloggning.
         </p>
       </div>
 
@@ -313,6 +323,75 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    // Mark form BEFORE main.js loads, so main.js skips its default handler
+    (function() { const f = document.getElementById('interest-form'); if (f) f.dataset.supabaseHandled = 'true'; })();
+  </script>
   <script src="js/main.js"></script>
+  <script>
+    // Override interest form to submit to Supabase housing_queue
+    document.addEventListener('DOMContentLoaded', () => {
+      const interestForm = document.getElementById('interest-form');
+      if (!interestForm) return;
+
+      interestForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('interest-name').value.trim();
+        const phone = document.getElementById('interest-phone').value.trim();
+        const email = document.getElementById('interest-email').value.trim();
+        const size = document.getElementById('interest-size').value;
+        const moveDate = document.getElementById('interest-move').value.trim();
+        const notes = document.getElementById('interest-msg').value.trim();
+
+        if (!name || !phone || !email || !size) {
+          if (typeof validateForm === 'function') validateForm(interestForm);
+          return;
+        }
+
+        if (!isSupabaseConfigured()) {
+          if (typeof showFormSuccess === 'function') {
+            showFormSuccess(interestForm, 'Tack för din intresseanmälan! Du är nu registrerad i vår kö och vi hör av oss när en lägenhet blir ledig.');
+          }
+          return;
+        }
+
+        const submitBtn = interestForm.querySelector('[type="submit"]');
+        const originalHtml = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner" style="width:18px;height:18px;border-width:2px;display:inline-block;margin-right:8px;vertical-align:middle;"></span> Skickar...';
+
+        try {
+          const user = await getCurrentUser();
+          const { error } = await supabaseClient.from('housing_queue').insert([{
+            full_name: name,
+            email,
+            phone,
+            preferred_size: size,
+            move_date: moveDate || null,
+            notes: notes || null,
+            user_id: user ? user.id : null
+          }]);
+
+          if (error) {
+            showToast('Något gick fel. Försök igen.', 'error');
+          } else {
+            if (typeof showFormSuccess === 'function') {
+              showFormSuccess(interestForm, 'Tack för din intresseanmälan! Vi hör av oss när en lägenhet passar dina önskemål.');
+            }
+            showToast('Intresseanmälan skickad!', 'success');
+          }
+        } catch (err) {
+          showToast('Något gick fel. Försök igen.', 'error');
+        }
+
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalHtml;
+      }, true);
+    });
+  </script>
 </body>
 </html>
