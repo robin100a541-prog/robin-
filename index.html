@@ -22,7 +22,6 @@
     </button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
-      <li><a href="#football">Football</a></li>
       <li><a href="#creator">Creator</a></li>
       <li><a href="#msj">MSJ</a></li>
       <li><a href="#social">Socials</a></li>
@@ -34,7 +33,6 @@
   <!-- HERO -->
   <section class="hero" id="hero">
     <div class="hero-bg">
-      <div class="hero-img" style="background-image:url('images/hero-bg.jpg')"></div>
       <div class="hero-overlay"></div>
       <div class="hero-grid"></div>
     </div>
@@ -92,14 +90,9 @@
       <div class="about-grid">
         <div class="about-visual reveal">
           <div class="about-img-frame">
-            <img src="images/about.jpg" alt="Robin Aoun" class="about-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-            <div class="about-img-placeholder">
+            <div class="about-img-placeholder" style="display:flex;">
               <div class="about-initials">RA</div>
             </div>
-          </div>
-          <!-- sunset image -->
-          <div class="about-img-secondary">
-            <img src="images/sunset.jpg" alt="Robin Aoun" onerror="this.parentElement.style.display='none'" />
           </div>
         </div>
 
@@ -144,126 +137,58 @@
     </div>
   </section>
 
-  <!-- FOOTBALL -->
-  <section class="section football" id="football">
-    <div class="football-bg-text">FOOTBALL</div>
-    <div class="container">
-      <div class="football-inner">
-        <div class="football-images reveal">
-          <div class="football-img-grid">
-            <div class="fimg fimg-main">
-              <img src="images/football-action.jpg" alt="Robin Aoun in action" onerror="this.parentElement.classList.add('no-img')" />
-            </div>
-            <div class="fimg fimg-secondary">
-              <img src="images/football-training.jpg" alt="Robin Aoun training" onerror="this.parentElement.classList.add('no-img')" />
-            </div>
-          </div>
-        </div>
-
-        <div class="football-content reveal delay-1">
-          <p class="section-label">On The Pitch</p>
-          <h2 class="section-title">Football is<br /><span class="accent">expression.</span></h2>
-          <p class="football-desc">
-            I've been playing football since I was 6 years old — not because someone told me to,
-            but because it's where I feel most alive. Over the years I've competed at youth level
-            across multiple countries, including time at <strong>Sporting CP in Portugal</strong>,
-            and have continuously grown as a player and a person through the game.
-          </p>
-          <p class="football-desc">
-            Currently playing senior football in Sweden, I perform best when I'm
-            mentally free and in flow. Football is my biggest expression of self —
-            technical, creative, and relentless.
-          </p>
-          <div class="football-current-badge">
-            <div class="fcb-left">
-              <span class="fcb-label">Current Club</span>
-              <strong>Skultorps IF</strong>
-            </div>
-            <div class="fcb-divider"></div>
-            <div class="fcb-right">
-              <span class="fcb-label">Position</span>
-              <strong>Central Midfielder</strong>
-            </div>
-            <div class="fcb-status">
-              <span class="status-dot"></span> Active
-            </div>
-          </div>
-          <blockquote class="football-quote">
-            "I perform best when I'm happy and free mentally.
-            Football is my expression — and when I'm in flow,
-            the game becomes something else entirely."
-          </blockquote>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- CREATOR & BUSINESS -->
   <section class="section creator" id="creator">
     <div class="container">
       <div class="section-header reveal">
-        <p class="section-label">Off The Pitch</p>
+        <p class="section-label">What I Do</p>
         <h2 class="section-title">Creator.<br /><span class="accent">Entrepreneur.</span></h2>
-        <p class="section-subtitle">Building a digital empire alongside the football dream.</p>
+        <p class="section-subtitle">Building multiple things at once — content, brands, businesses, and a life worth talking about. Also a footballer, currently playing senior football in Sweden.</p>
       </div>
 
-      <div class="creator-layout">
-        <div class="creator-cards">
-          <div class="creator-card reveal">
-            <div class="cc-icon">🎬</div>
-            <h3>Content Creation</h3>
-            <p>
-              Cinematic motivational football content — bold visuals, deep philosophical
-              captions, real footage that hits the soul. Short-form Reels, TikToks,
-              and carousels built to inspire.
-            </p>
-            <ul class="cc-tags">
-              <li>DaVinci Resolve</li>
-              <li>Reels & TikTok</li>
-              <li>Cinematic Edits</li>
-            </ul>
-          </div>
-
-          <div class="creator-card reveal delay-1">
-            <div class="cc-icon">📈</div>
-            <h3>Digital Marketing</h3>
-            <p>
-              Running a freelance digital marketing firm — editing, social strategy,
-              and brand growth for multiple clients. Motion graphics, YouTube production,
-              brand storytelling.
-            </p>
-            <ul class="cc-tags">
-              <li>Social Strategy</li>
-              <li>Motion Graphics</li>
-              <li>Brand Growth</li>
-            </ul>
-          </div>
-
-          <div class="creator-card reveal delay-2">
-            <div class="cc-icon">🏠</div>
-            <h3>Real Estate</h3>
-            <p>
-              Co-owner of <strong>CRI Fastigheter AB</strong>, leading invoicing,
-              budgeting, planning, and renovation project management from age 19.
-            </p>
-            <ul class="cc-tags">
-              <li>CRI Fastigheter AB</li>
-              <li>Project Management</li>
-              <li>Budgeting</li>
-            </ul>
-          </div>
+      <div class="creator-cards-grid">
+        <div class="creator-card reveal">
+          <div class="cc-icon">🎬</div>
+          <h3>Content Creation</h3>
+          <p>
+            Cinematic motivational content — bold visuals, deep philosophical
+            captions, real footage that hits the soul. Short-form Reels, TikToks,
+            and carousels built to inspire.
+          </p>
+          <ul class="cc-tags">
+            <li>DaVinci Resolve</li>
+            <li>Reels & TikTok</li>
+            <li>Cinematic Edits</li>
+          </ul>
         </div>
 
-        <div class="creator-img reveal delay-1">
-          <div class="creator-img-frame">
-            <img src="images/creator.jpg" alt="Robin Aoun behind the scenes" onerror="this.parentElement.classList.add('no-img')" />
-            <div class="creator-img-overlay">
-              <span>Behind the scenes</span>
-            </div>
-          </div>
-          <div class="creator-aoun-brand">
-            <img src="images/aoun-brand.jpg" alt="AOUN brand" onerror="this.parentElement.style.display='none'" />
-          </div>
+        <div class="creator-card reveal delay-1">
+          <div class="cc-icon">📈</div>
+          <h3>Digital Marketing</h3>
+          <p>
+            Running a freelance digital marketing firm helping brands and individuals
+            grow. Editing, social strategy, motion graphics, and brand storytelling
+            for clients across industries.
+          </p>
+          <ul class="cc-tags">
+            <li>Social Strategy</li>
+            <li>Motion Graphics</li>
+            <li>Brand Growth</li>
+          </ul>
+        </div>
+
+        <div class="creator-card reveal delay-2">
+          <div class="cc-icon">🏠</div>
+          <h3>Real Estate</h3>
+          <p>
+            Co-owner of <strong>CRI Fastigheter AB</strong>, leading invoicing,
+            budgeting, planning, and renovation project management from age 19.
+          </p>
+          <ul class="cc-tags">
+            <li>CRI Fastigheter AB</li>
+            <li>Project Management</li>
+            <li>Budgeting</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -428,12 +353,30 @@
   <section class="section contact" id="contact">
     <div class="container">
       <div class="contact-inner reveal">
-        <p class="section-label">Let's Connect</p>
-        <h2 class="section-title contact-title">Work With<br /><span class="accent">Robin.</span></h2>
+        <p class="section-label">Work With Me</p>
+        <h2 class="section-title contact-title">Let's build<br /><span class="accent">together.</span></h2>
         <p class="contact-sub">
-          Looking for a content creator, video editor, marketing partner, or footballer?
-          Let's build something together.
+          I've helped over <strong>15 clients</strong> grow their brands, expand their reach,
+          and produce content that actually converts — through editing, marketing strategy,
+          and social media management. If you're ready to take your brand to the next level,
+          let's talk.
         </p>
+
+        <div class="contact-proof">
+          <div class="proof-stat">
+            <span class="proof-num">15+</span>
+            <span class="proof-label">Clients Worked With</span>
+          </div>
+          <div class="proof-stat">
+            <span class="proof-num">100K+</span>
+            <span class="proof-label">People Reached</span>
+          </div>
+          <div class="proof-stat">
+            <span class="proof-num">3+</span>
+            <span class="proof-label">Active Businesses</span>
+          </div>
+        </div>
+
         <div class="contact-options">
           <a href="mailto:robin100a541@gmail.com" class="contact-card">
             <div class="contact-card-icon">✉️</div>
@@ -464,7 +407,7 @@
             <span>Social Media Management</span>
             <span>Motion Graphics</span>
             <span>Brand Partnerships</span>
-            <span>Football Collaborations</span>
+            <span>Content Strategy</span>
             <span>MSJ Community</span>
           </div>
         </div>
